@@ -1,0 +1,6 @@
+module Pods_PhotoExample {
+  umbrella header "Pods-PhotoExample-umbrella.h"
+
+  export *
+  module * { export * }
+}

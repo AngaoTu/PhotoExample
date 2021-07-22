@@ -75,19 +75,38 @@ private extension FetchAssetViewController {
     }
     
     func fetchImageAssets() {
-        
+        let imageAssets = PHAsset.fetchAssets(with: .image, options: nil)
+        skipAssetListViewController(fetchResult: imageAssets)
     }
     
     func fetchVedioAssets() {
-        
+        let vedioAssets = PHAsset.fetchAssets(with: .video, options: nil)
+        skipAssetListViewController(fetchResult: vedioAssets)
     }
     
     func fetchCollectionAssets() {
-        
+        // 先获取一个相册
+        guard let lastAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).lastObject else { return }
+        // 然后再获取该相册中图片
+        let assets = PHAsset.fetchAssets(in: lastAlbum, options: nil)
+        skipAssetListViewController(fetchResult: assets)
     }
     
     func fetchAsetsByLocalIdentifiers() {
-        
+        // 这是为了举一个通过localIdentifier来获取PHAsset例子，由于没有现成的localIdentifier，所以采用以下方式绕了一个圈
+        // 先获取一个相册
+        guard let firstAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).firstObject else { return }
+        // 先获取该相册所有asset
+        let assets = PHAsset.fetchAssets(in: firstAlbum, options: nil)
+        // 再获取该相册中所有图片的localIdentifier
+        var localIdentifiers: [String] = []
+        for i in 0..<assets.count {
+            let asset = assets[i]
+            localIdentifiers.append(asset.localIdentifier)
+        }
+        // 再通过localIdentifers来获取对应的图片
+        let assetsByLocalIdentifiers = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil)
+        skipAssetListViewController(fetchResult: assetsByLocalIdentifiers)
     }
     
     func skipAssetListViewController(fetchResult: PHFetchResult<PHAsset>) {
@@ -104,22 +123,3 @@ enum FetchAssetType: String {
     case fetchCollectionAssets = "拉取相册中资源"
     case fetchAssetsByLocalIdentifiers = "通过LocalId拉取资源"
 }
-//@available(iOS 8, *)
-//open class func fetchAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>
-//
-//@available(iOS 8, *)
-//open class func fetchAssets(withLocalIdentifiers identifiers: [String], options: PHFetchOptions?) -> PHFetchResult<PHAsset> // includes hidden assets by default
-//
-//@available(iOS 8, *)
-//open class func fetchKeyAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>?
-//
-//@available(iOS 8, *)
-//open class func fetchAssets(withBurstIdentifier burstIdentifier: String, options: PHFetchOptions?) -> PHFetchResult<PHAsset>
-//
-//
-//// Fetches PHAssetSourceTypeUserLibrary assets by default (use includeAssetSourceTypes option to override)
-//@available(iOS 8, *)
-//open class func fetchAssets(with options: PHFetchOptions?) -> PHFetchResult<PHAsset>
-//
-//@available(iOS 8, *)
-//open class func fetchAssets(with mediaType: PHAssetMediaType, options: PHFetchOptions?) -> PHFetchResult<PHAsset>

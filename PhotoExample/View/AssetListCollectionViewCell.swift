@@ -33,6 +33,7 @@ class AssetListCollectionViewCell: UICollectionViewCell {
     // MARK: - 私有属性
     private lazy var imageView: UIImageView = {
         let temp = UIImageView()
+        temp.clipsToBounds = true
         temp.contentMode = .scaleAspectFill
         return temp
     }()

@@ -60,8 +60,8 @@ extension AssetListViewController: UICollectionViewDelegate, UICollectionViewDat
         let options = PHImageRequestOptions()
         options.resizeMode = .fast
         options.isSynchronous = false
-        options.deliveryMode = .fastFormat
-        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 50, height: 50), contentMode: .aspectFill, options: options) { image, infos in
+        options.deliveryMode = .opportunistic
+        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFill, options: options) { image, infos in
             cell.image = image
         }
         return cell
@@ -73,7 +73,7 @@ private extension AssetListViewController {
     func initView() {
         view.backgroundColor = .white
         view.addSubview(collectionView)
-        title = "照片"
+        title = "图库"
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }

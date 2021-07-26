@@ -43,7 +43,7 @@ extension FetchAssetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataList[indexPath.row] {
         case .assetModel:
-            break
+            assetModel()
         case .fetchAllAssets:
             fetchAllAssets()
         case .fetchImageAssets:
@@ -65,6 +65,12 @@ private extension FetchAssetViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func assetModel() {
+        guard let asset = PHAsset.fetchAssets(with: .image, options: nil).firstObject else { return }
+        let assetModelViewController = AssetModelViewController(asset: asset)
+        self.navigationController?.pushViewController(assetModelViewController, animated: true)
     }
     
     func fetchAllAssets() {

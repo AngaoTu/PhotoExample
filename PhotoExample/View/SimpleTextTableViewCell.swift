@@ -27,6 +27,7 @@ class SimpleTextTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(15)
             make.centerY.equalToSuperview()
+            make.right.equalTo(-15)
         }
     }
     
@@ -42,6 +43,7 @@ class SimpleTextTableViewCell: UITableViewCell {
         let temp = UILabel()
         temp.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         temp.textColor = .black
+        temp.numberOfLines = 0
         return temp
     }()
 }

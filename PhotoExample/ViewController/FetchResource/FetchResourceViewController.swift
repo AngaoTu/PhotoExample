@@ -14,7 +14,7 @@ class FetchResourceViewController: UIViewController {
         self.initView()
     }
     
-    // MARK - 私有属性
+    // MARK: - 私有属性
     private lazy var tableView: UITableView = {
         let temp = UITableView()
         temp.delegate = self
@@ -24,7 +24,7 @@ class FetchResourceViewController: UIViewController {
         return temp
     }()
     
-    private let dataList: [FetchResourceType] = [.album, .imageAsset, .videoAsset]
+    private let dataList: [FetchResourceType] = [.album, .asset]
 }
 
 extension FetchResourceViewController: UITableViewDelegate, UITableViewDataSource {
@@ -45,13 +45,9 @@ extension FetchResourceViewController: UITableViewDelegate, UITableViewDataSourc
         case .album:
             let fetchAlbumViewController = FetchAlbumViewController()
             self.navigationController?.pushViewController(fetchAlbumViewController, animated: true)
-        case .imageAsset:
-            let fetchImageAssetViewController = FetchAssetViewController()
-            self.navigationController?.pushViewController(fetchImageAssetViewController, animated: true)
-        case .videoAsset:
-            break
-//        default:
-//            break
+        case .asset:
+            let fetchAssetViewController = FetchAssetViewController()
+            self.navigationController?.pushViewController(fetchAssetViewController, animated: true)
         }
     }
 }
@@ -69,6 +65,5 @@ private extension FetchResourceViewController {
 
 enum FetchResourceType: String {
     case album = "相册资源"
-    case imageAsset = "图片资源"
-    case videoAsset = "视频资源"
+    case asset = "照片资源"
 }

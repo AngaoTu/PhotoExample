@@ -14,7 +14,7 @@ class FetchAlbumViewController: UIViewController {
         self.initView()
     }
     
-    // MARK - 私有属性
+    // MARK: - 私有属性
     private lazy var tableView: UITableView = {
         let temp = UITableView()
         temp.delegate = self

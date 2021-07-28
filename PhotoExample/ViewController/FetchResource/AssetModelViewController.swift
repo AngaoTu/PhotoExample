@@ -35,7 +35,7 @@ class AssetModelViewController: UIViewController {
         return temp
     }()
     
-    private let dataList: [PHAssetModelFieldType] = [.localIdentifier, .playbackStyle, .mediaType, .mediaSubtypes, .pixelWidth, .pixeHeight, .creationDate, .modificationDate, .location, .duration, .isHidden, .isFavorite, .burstIdentifier, .burstSelectionTypes, .representBurst, .sourceType]
+    private let dataList: [PHAssetPropertyType] = [.localIdentifier, .playbackStyle, .mediaType, .mediaSubtypes, .pixelWidth, .pixeHeight, .creationDate, .modificationDate, .location, .duration, .isHidden, .isFavorite, .burstIdentifier, .burstSelectionTypes, .representBurst, .sourceType]
     
     private var currentAsset: PHAsset?
 }
@@ -371,7 +371,7 @@ private extension AssetModelViewController {
         return sourceTypeString
     }
 }
-private enum PHAssetModelFieldType: String {
+private enum PHAssetPropertyType: String {
     case localIdentifier
     case playbackStyle
     case mediaType

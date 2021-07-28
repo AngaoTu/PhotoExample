@@ -24,7 +24,7 @@ class FetchAlbumViewController: UIViewController {
         return temp
     }()
     
-    private let dataList: [FetchAlbumType] = [.album, .smartAlbum, .momentAlbum]
+    private let dataList: [FetchAlbumType] = [.assetCollection, .album, .smartAlbum, .momentAlbum]
 }
 
 extension FetchAlbumViewController: UITableViewDelegate, UITableViewDataSource {
@@ -42,6 +42,10 @@ extension FetchAlbumViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataList[indexPath.row] {
+        case .assetCollection:
+            guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).firstObject else { return }
+            let assetCollectionViewController = AssetCollectionViewController(assetCollection: albumResult)
+            self.navigationController?.pushViewController(assetCollectionViewController, animated: true)
         case .album:
             fetchAlbum()
         case .smartAlbum:
@@ -86,6 +90,7 @@ private extension FetchAlbumViewController {
 }
 
 enum FetchAlbumType: String {
+    case assetCollection = "PHAssetCollection模型"
     case album = "相册"
     case smartAlbum = "智能相册"
     case momentAlbum = "时刻相册"

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24234572EDF8A320B1C6040B /* libPods-PhotoExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58932F0E06E4E6B36E6137F9 /* libPods-PhotoExample.a */; };
 		4F03CB1626AE951100A1268F /* AssetModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1526AE951100A1268F /* AssetModelViewController.swift */; };
+		4F03CB1826B1545700A1268F /* AssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */; };
 		4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE526A6F52700799A74 /* AppDelegate.swift */; };
 		4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */; };
 		4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE926A6F52700799A74 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		11F72804832D263202329519 /* Pods-PhotoExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoExample.release.xcconfig"; path = "Target Support Files/Pods-PhotoExample/Pods-PhotoExample.release.xcconfig"; sourceTree = "<group>"; };
 		4F03CB1526AE951100A1268F /* AssetModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModelViewController.swift; sourceTree = "<group>"; };
+		4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewController.swift; sourceTree = "<group>"; };
 		4FDBDCE226A6F52700799A74 /* PhotoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDBDCE526A6F52700799A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				4FDBDD1E26A8033300799A74 /* FetchResourceViewController.swift */,
 				4FDBDD2026A805CC00799A74 /* FetchAlbumViewController.swift */,
+				4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */,
 				4FDBDD2726A81BFC00799A74 /* FetchAssetViewController.swift */,
 				4F03CB1526AE951100A1268F /* AssetModelViewController.swift */,
 			);
@@ -385,6 +388,7 @@
 				4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */,
 				4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */,
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
+				4F03CB1826B1545700A1268F /* AssetCollectionViewController.swift in Sources */,
 				4FDBDD2126A805CC00799A74 /* FetchAlbumViewController.swift in Sources */,
 				4F03CB1626AE951100A1268F /* AssetModelViewController.swift in Sources */,
 				4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */,

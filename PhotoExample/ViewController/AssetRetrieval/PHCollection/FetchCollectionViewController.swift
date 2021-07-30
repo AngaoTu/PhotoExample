@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class FetchAlbumViewController: UIViewController {
+class FetchCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initView()
@@ -27,7 +27,7 @@ class FetchAlbumViewController: UIViewController {
     private let dataList: [FetchAlbumType] = [.assetCollection, .album, .smartAlbum, .momentAlbum]
 }
 
-extension FetchAlbumViewController: UITableViewDelegate, UITableViewDataSource {
+extension FetchCollectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -44,7 +44,7 @@ extension FetchAlbumViewController: UITableViewDelegate, UITableViewDataSource {
         switch dataList[indexPath.row] {
         case .assetCollection:
             guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).firstObject else { return }
-            let assetCollectionViewController = AssetCollectionViewController(assetCollection: albumResult)
+            let assetCollectionViewController = PHAssetCollectionViewController(assetCollection: albumResult)
             self.navigationController?.pushViewController(assetCollectionViewController, animated: true)
         case .album:
             fetchAlbum()
@@ -58,7 +58,7 @@ extension FetchAlbumViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-private extension FetchAlbumViewController {
+private extension FetchCollectionViewController {
     func initView() {
         view.backgroundColor = .white
         view.addSubview(tableView)

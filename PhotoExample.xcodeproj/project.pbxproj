@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24234572EDF8A320B1C6040B /* libPods-PhotoExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58932F0E06E4E6B36E6137F9 /* libPods-PhotoExample.a */; };
-		4F03CB1626AE951100A1268F /* AssetModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1526AE951100A1268F /* AssetModelViewController.swift */; };
-		4F03CB1826B1545700A1268F /* AssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */; };
+		4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1526AE951100A1268F /* PHAssetViewController.swift */; };
+		4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */; };
 		4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE526A6F52700799A74 /* AppDelegate.swift */; };
 		4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */; };
 		4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE926A6F52700799A74 /* ViewController.swift */; };
@@ -20,8 +20,8 @@
 		4FDBDD0826A6F52A00799A74 /* PhotoExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD0726A6F52A00799A74 /* PhotoExampleUITests.swift */; };
 		4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD1726A7D33000799A74 /* SimpleTextTableViewCell.swift */; };
 		4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD1B26A8029000799A74 /* ModifyResourceViewController.swift */; };
-		4FDBDD1F26A8033300799A74 /* FetchResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD1E26A8033300799A74 /* FetchResourceViewController.swift */; };
-		4FDBDD2126A805CC00799A74 /* FetchAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2026A805CC00799A74 /* FetchAlbumViewController.swift */; };
+		4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD1E26A8033300799A74 /* AssetRetrievalViewController.swift */; };
+		4FDBDD2126A805CC00799A74 /* FetchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2026A805CC00799A74 /* FetchCollectionViewController.swift */; };
 		4FDBDD2326A80CBE00799A74 /* AlbumListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2226A80CBE00799A74 /* AlbumListTableViewCell.swift */; };
 		4FDBDD2526A80F3100799A74 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */; };
 		4FDBDD2826A81BFC00799A74 /* FetchAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2726A81BFC00799A74 /* FetchAssetViewController.swift */; };
@@ -48,8 +48,8 @@
 
 /* Begin PBXFileReference section */
 		11F72804832D263202329519 /* Pods-PhotoExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoExample.release.xcconfig"; path = "Target Support Files/Pods-PhotoExample/Pods-PhotoExample.release.xcconfig"; sourceTree = "<group>"; };
-		4F03CB1526AE951100A1268F /* AssetModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModelViewController.swift; sourceTree = "<group>"; };
-		4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewController.swift; sourceTree = "<group>"; };
+		4F03CB1526AE951100A1268F /* PHAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetViewController.swift; sourceTree = "<group>"; };
+		4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionViewController.swift; sourceTree = "<group>"; };
 		4FDBDCE226A6F52700799A74 /* PhotoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDBDCE526A6F52700799A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +66,8 @@
 		4FDBDD0926A6F52A00799A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FDBDD1726A7D33000799A74 /* SimpleTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextTableViewCell.swift; sourceTree = "<group>"; };
 		4FDBDD1B26A8029000799A74 /* ModifyResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyResourceViewController.swift; sourceTree = "<group>"; };
-		4FDBDD1E26A8033300799A74 /* FetchResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResourceViewController.swift; sourceTree = "<group>"; };
-		4FDBDD2026A805CC00799A74 /* FetchAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAlbumViewController.swift; sourceTree = "<group>"; };
+		4FDBDD1E26A8033300799A74 /* AssetRetrievalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetRetrievalViewController.swift; sourceTree = "<group>"; };
+		4FDBDD2026A805CC00799A74 /* FetchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCollectionViewController.swift; sourceTree = "<group>"; };
 		4FDBDD2226A80CBE00799A74 /* AlbumListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListTableViewCell.swift; sourceTree = "<group>"; };
 		4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		4FDBDD2726A81BFC00799A74 /* FetchAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAssetViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F03CB4626B3AC5500A1268F /* PHAsset */ = {
+			isa = PBXGroup;
+			children = (
+				4FDBDD2726A81BFC00799A74 /* FetchAssetViewController.swift */,
+				4F03CB1526AE951100A1268F /* PHAssetViewController.swift */,
+			);
+			path = PHAsset;
+			sourceTree = "<group>";
+		};
+		4F03CB4726B3AC6200A1268F /* PHCollection */ = {
+			isa = PBXGroup;
+			children = (
+				4FDBDD2026A805CC00799A74 /* FetchCollectionViewController.swift */,
+				4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */,
+			);
+			path = PHCollection;
+			sourceTree = "<group>";
+		};
 		4FDBDCD926A6F52700799A74 = {
 			isa = PBXGroup;
 			children = (
@@ -189,23 +207,21 @@
 				4FDBDCE926A6F52700799A74 /* ViewController.swift */,
 				4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */,
 				4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */,
-				4FDBDD1D26A8031700799A74 /* FetchResource */,
+				4FDBDD1D26A8031700799A74 /* AssetRetrieval */,
 				4FDBDD1526A7012600799A74 /* ChangeObserver */,
 				4FDBDD1626A7018600799A74 /* ModifyResource */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		4FDBDD1D26A8031700799A74 /* FetchResource */ = {
+		4FDBDD1D26A8031700799A74 /* AssetRetrieval */ = {
 			isa = PBXGroup;
 			children = (
-				4FDBDD1E26A8033300799A74 /* FetchResourceViewController.swift */,
-				4FDBDD2026A805CC00799A74 /* FetchAlbumViewController.swift */,
-				4F03CB1726B1545700A1268F /* AssetCollectionViewController.swift */,
-				4FDBDD2726A81BFC00799A74 /* FetchAssetViewController.swift */,
-				4F03CB1526AE951100A1268F /* AssetModelViewController.swift */,
+				4FDBDD1E26A8033300799A74 /* AssetRetrievalViewController.swift */,
+				4F03CB4626B3AC5500A1268F /* PHAsset */,
+				4F03CB4726B3AC6200A1268F /* PHCollection */,
 			);
-			path = FetchResource;
+			path = AssetRetrieval;
 			sourceTree = "<group>";
 		};
 		D242F7D67D5F1F652D888550 /* Frameworks */ = {
@@ -383,14 +399,14 @@
 			files = (
 				4FDBDD2826A81BFC00799A74 /* FetchAssetViewController.swift in Sources */,
 				4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */,
-				4FDBDD1F26A8033300799A74 /* FetchResourceViewController.swift in Sources */,
+				4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */,
 				4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */,
 				4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */,
 				4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */,
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
-				4F03CB1826B1545700A1268F /* AssetCollectionViewController.swift in Sources */,
-				4FDBDD2126A805CC00799A74 /* FetchAlbumViewController.swift in Sources */,
-				4F03CB1626AE951100A1268F /* AssetModelViewController.swift in Sources */,
+				4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */,
+				4FDBDD2126A805CC00799A74 /* FetchCollectionViewController.swift in Sources */,
+				4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */,
 				4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */,
 				4FDBDD2C26A83BE300799A74 /* AssetListCollectionViewCell.swift in Sources */,
 				4FDBDD2526A80F3100799A74 /* AlbumListViewController.swift in Sources */,

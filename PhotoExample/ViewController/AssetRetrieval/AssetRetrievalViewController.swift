@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FetchResourceViewController: UIViewController {
+class AssetRetrievalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class FetchResourceViewController: UIViewController {
     private let dataList: [FetchResourceType] = [.album, .asset]
 }
 
-extension FetchResourceViewController: UITableViewDelegate, UITableViewDataSource {
+extension AssetRetrievalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -43,7 +43,7 @@ extension FetchResourceViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataList[indexPath.row] {
         case .album:
-            let fetchAlbumViewController = FetchAlbumViewController()
+            let fetchAlbumViewController = FetchCollectionViewController()
             self.navigationController?.pushViewController(fetchAlbumViewController, animated: true)
         case .asset:
             let fetchAssetViewController = FetchAssetViewController()
@@ -52,7 +52,7 @@ extension FetchResourceViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-private extension FetchResourceViewController {
+private extension AssetRetrievalViewController {
     func initView() {
         view.backgroundColor = .white
         self.title = "获取资源"

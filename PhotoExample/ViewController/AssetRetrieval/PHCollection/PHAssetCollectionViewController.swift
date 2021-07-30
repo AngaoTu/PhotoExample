@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class AssetCollectionViewController: UIViewController {
+class PHAssetCollectionViewController: UIViewController {
     // MARK: - initialization
     init(assetCollection: PHAssetCollection) {
         self.currentAssetCollection = assetCollection
@@ -40,7 +40,7 @@ class AssetCollectionViewController: UIViewController {
     private let currentAssetCollection: PHAssetCollection
 }
 
-extension AssetCollectionViewController: UITableViewDelegate, UITableViewDataSource {
+extension PHAssetCollectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -77,7 +77,7 @@ extension AssetCollectionViewController: UITableViewDelegate, UITableViewDataSou
     }
 }
 
-private extension AssetCollectionViewController {
+private extension PHAssetCollectionViewController {
     func initView() {
         view.backgroundColor = .white
         self.title = "获取资源"

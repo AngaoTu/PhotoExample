@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class AssetModelViewController: UIViewController {
+class PHAssetViewController: UIViewController {
     // MARK: - initialization
     init(asset: PHAsset) {
         super.init(nibName: nil, bundle: nil)
@@ -40,7 +40,7 @@ class AssetModelViewController: UIViewController {
     private var currentAsset: PHAsset?
 }
 
-extension AssetModelViewController: UITableViewDelegate, UITableViewDataSource {
+extension PHAssetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -95,7 +95,7 @@ extension AssetModelViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-private extension AssetModelViewController {
+private extension PHAssetViewController {
     func initView() {
         view.backgroundColor = .white
         self.title = "PHAsset模型"

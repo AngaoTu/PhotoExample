@@ -69,7 +69,7 @@ private extension FetchAssetViewController {
     
     func assetModel() {
         guard let asset = PHAsset.fetchAssets(with: .image, options: nil).firstObject else { return }
-        let assetModelViewController = AssetModelViewController(asset: asset)
+        let assetModelViewController = PHAssetViewController(asset: asset)
         self.navigationController?.pushViewController(assetModelViewController, animated: true)
     }
     

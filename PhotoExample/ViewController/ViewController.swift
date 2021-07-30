@@ -46,7 +46,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataList[indexPath.row] {
         case .fetchResource:
-            let fetchResourceViewController = FetchResourceViewController()
+            let fetchResourceViewController = AssetRetrievalViewController()
             self.navigationController?.pushViewController(fetchResourceViewController, animated: true)
         case .changeObserver:
             print("tqy: 点击了 changeObserver")

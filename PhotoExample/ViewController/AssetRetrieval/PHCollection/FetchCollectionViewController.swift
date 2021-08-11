@@ -8,42 +8,36 @@
 import UIKit
 import Photos
 
-class FetchCollectionViewController: UIViewController {
+class FetchCollectionViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initView()
+        self.dataList = [FetchAlbumType.assetCollection, FetchAlbumType.album, FetchAlbumType.smartAlbum, FetchAlbumType.momentAlbum]
     }
     
-    // MARK: - 私有属性
-    private lazy var tableView: UITableView = {
-        let temp = UITableView()
-        temp.delegate = self
-        temp.dataSource = self
-        temp.rowHeight = 44
-        temp.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
-        return temp
-    }()
-    
-    private let dataList: [FetchAlbumType] = [.assetCollection, .album, .smartAlbum, .momentAlbum]
+    override func initView() {
+        super.initView()
+        tableView.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
+    }
 }
 
-extension FetchCollectionViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension FetchCollectionViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
             return UITableViewCell()
         }
-        cell.textString = dataList[indexPath.row].rawValue
+        cell.textString = (dataList[indexPath.row] as? FetchAlbumType)?.rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch dataList[indexPath.row] {
+        guard let type = dataList[indexPath.row] as? FetchAlbumType else { return }
+        switch type {
         case .assetCollection:
-            guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).firstObject else { return }
+            guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil).firstObject else { return }
             let assetCollectionViewController = PHAssetCollectionViewController(assetCollection: albumResult)
             self.navigationController?.pushViewController(assetCollectionViewController, animated: true)
         case .album:
@@ -52,21 +46,11 @@ extension FetchCollectionViewController: UITableViewDelegate, UITableViewDataSou
             fetchSmartAlbum()
         case .momentAlbum:
             fetchMomentAlbum()
-//        default:
-//            break
         }
     }
 }
 
 private extension FetchCollectionViewController {
-    func initView() {
-        view.backgroundColor = .white
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
     func fetchAlbum() {
         let albumResults: PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
         skipAlbumListViewController(title: "我的相册", fetchResult: albumResults)

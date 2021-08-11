@@ -8,40 +8,34 @@
 import UIKit
 import Photos
 
-class FetchAssetViewController: UIViewController {
+class FetchAssetViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initView()
+        self.dataList = [FetchAssetType.assetModel, FetchAssetType.fetchAllAssets, FetchAssetType.fetchImageAssets, FetchAssetType.fetchVedioAssets, FetchAssetType.fetchCollectionAssets, FetchAssetType.fetchAssetsByLocalIdentifiers]
     }
     
-    // MARK: - 私有属性
-    private lazy var tableView: UITableView = {
-        let temp = UITableView()
-        temp.delegate = self
-        temp.dataSource = self
-        temp.rowHeight = 44
-        temp.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
-        return temp
-    }()
-    
-    private let dataList: [FetchAssetType] = [.assetModel, .fetchAllAssets, .fetchImageAssets, .fetchVedioAssets, .fetchCollectionAssets, .fetchAssetsByLocalIdentifiers]
+    override func initView() {
+        super.initView()
+        tableView.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
+    }
 }
 
-extension FetchAssetViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension FetchAssetViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
             return UITableViewCell()
         }
-        cell.textString = dataList[indexPath.row].rawValue
+        cell.textString = (dataList[indexPath.row] as? FetchAssetType)?.rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch dataList[indexPath.row] {
+        guard let type = dataList[indexPath.row] as? FetchAssetType else { return }
+        switch type {
         case .assetModel:
             assetModel()
         case .fetchAllAssets:
@@ -59,14 +53,6 @@ extension FetchAssetViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 private extension FetchAssetViewController {
-    func initView() {
-        view.backgroundColor = .white
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
     func assetModel() {
         guard let asset = PHAsset.fetchAssets(with: .image, options: nil).firstObject else { return }
         let assetModelViewController = PHAssetViewController(asset: asset)

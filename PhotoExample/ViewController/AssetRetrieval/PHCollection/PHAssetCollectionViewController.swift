@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class PHAssetCollectionViewController: UIViewController {
+class PHAssetCollectionViewController: BaseTableViewController {
     // MARK: - initialization
     init(assetCollection: PHAssetCollection) {
         self.currentAssetCollection = assetCollection
@@ -23,34 +23,31 @@ class PHAssetCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initView()
+        self.dataList = [PHAssetCollectionPropertyType.canContainAssets, PHAssetCollectionPropertyType.canContainCollection, PHAssetCollectionPropertyType.localizedTitle, PHAssetCollectionPropertyType.assetCollectionType, PHAssetCollectionPropertyType.assetCollectionSubtype, PHAssetCollectionPropertyType.estimatedAssetCount, PHAssetCollectionPropertyType.startDate, PHAssetCollectionPropertyType.endDate, PHAssetCollectionPropertyType.approximatedLocation, PHAssetCollectionPropertyType.localizedLocationNames]
+    }
+    
+    override func initView() {
+        super.initView()
+        self.title = "PHAssetCollection模型"
+        tableView.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
     }
     
     // MARK: - 私有属性
-    private lazy var tableView: UITableView = {
-        let temp = UITableView()
-        temp.delegate = self
-        temp.dataSource = self
-        temp.rowHeight = 88
-        temp.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
-        return temp
-    }()
-    
-    private let dataList: [PHAssetCollectionPropertyType] = [.canContainAssets, .canContainCollection, .localizedTitle, .assetCollectionType, .assetCollectionSubtype, .estimatedAssetCount, .startDate, .endDate, .approximatedLocation, .localizedLocationNames]
-    
     private let currentAssetCollection: PHAssetCollection
 }
 
-extension PHAssetCollectionViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension PHAssetCollectionViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell,
+              let type = dataList[indexPath.row] as? PHAssetCollectionPropertyType else {
             return UITableViewCell()
         }
         var textString = ""
-        switch dataList[indexPath.row] {
+        switch type {
         case .canContainAssets:
             textString = canContainAssets()
         case .canContainCollection:
@@ -72,21 +69,12 @@ extension PHAssetCollectionViewController: UITableViewDelegate, UITableViewDataS
         case .localizedLocationNames:
             textString = localizedLocationNames()
         }
-        cell.textString = "\(dataList[indexPath.row].rawValue): \(textString)"
+        cell.textString = "\(type): \(textString)"
         return cell
     }
 }
 
 private extension PHAssetCollectionViewController {
-    func initView() {
-        view.backgroundColor = .white
-        self.title = "获取资源"
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
     func canContainAssets() -> String {
         /*
          // 能否包含Assets

@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class PHAssetViewController: UIViewController {
+class PHAssetViewController: BaseTableViewController {
     // MARK: - initialization
     init(asset: PHAsset) {
         super.init(nibName: nil, bundle: nil)
@@ -22,36 +22,33 @@ class PHAssetViewController: UIViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initView()
+        dataList = [PHAssetPropertyType.localIdentifier, PHAssetPropertyType.playbackStyle, PHAssetPropertyType.mediaType, PHAssetPropertyType.mediaSubtypes, PHAssetPropertyType.pixelWidth, PHAssetPropertyType.pixeHeight, PHAssetPropertyType.creationDate, PHAssetPropertyType.modificationDate, PHAssetPropertyType.location, PHAssetPropertyType.duration, PHAssetPropertyType.isHidden, PHAssetPropertyType.isFavorite, PHAssetPropertyType.burstIdentifier, PHAssetPropertyType.burstSelectionTypes, PHAssetPropertyType.representBurst, PHAssetPropertyType.sourceType]
+    }
+    
+    override func initView() {
+        super.initView()
+        self.title = "PHAsset模型"
+        tableView.rowHeight = 60
+        tableView.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
     }
     
     // MARK: - 私有属性
-    private lazy var tableView: UITableView = {
-        let temp = UITableView()
-        temp.delegate = self
-        temp.dataSource = self
-        temp.rowHeight = 88
-        temp.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
-        return temp
-    }()
-    
-    private let dataList: [PHAssetPropertyType] = [.localIdentifier, .playbackStyle, .mediaType, .mediaSubtypes, .pixelWidth, .pixeHeight, .creationDate, .modificationDate, .location, .duration, .isHidden, .isFavorite, .burstIdentifier, .burstSelectionTypes, .representBurst, .sourceType]
-    
     private var currentAsset: PHAsset?
 }
 
-extension PHAssetViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension PHAssetViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell,
+              let type = dataList[indexPath.row] as? PHAssetPropertyType else {
             return UITableViewCell()
         }
         
         var textString = ""
-        switch dataList[indexPath.row] {
+        switch type {
         case .localIdentifier:
             textString = localIdentifier()
         case .playbackStyle:
@@ -90,21 +87,12 @@ extension PHAssetViewController: UITableViewDelegate, UITableViewDataSource {
             textString = sourceType()
         }
         
-        cell.textString = "\(dataList[indexPath.row].rawValue): \(textString)"
+        cell.textString = "\(type.rawValue): \(textString)"
         return cell
     }
 }
 
 private extension PHAssetViewController {
-    func initView() {
-        view.backgroundColor = .white
-        self.title = "PHAsset模型"
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
     func localIdentifier() -> String {
         /*
          // 由于PHAsset继承PHObject，所以它第一个属性应该是localIdentifier，也就是该资源唯一标识符

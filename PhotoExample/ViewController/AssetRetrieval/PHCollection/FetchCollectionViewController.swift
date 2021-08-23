@@ -11,7 +11,7 @@ import Photos
 class FetchCollectionViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataList = [FetchAlbumType.assetCollection, FetchAlbumType.album, FetchAlbumType.smartAlbum, FetchAlbumType.momentAlbum]
+        self.dataList = [FetchAlbumType.assetCollection, FetchAlbumType.collectionList, FetchAlbumType.album, FetchAlbumType.smartAlbum, FetchAlbumType.momentAlbum]
     }
     
     override func initView() {
@@ -40,6 +40,12 @@ extension FetchCollectionViewController {
             guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil).firstObject else { return }
             let assetCollectionViewController = PHAssetCollectionViewController(assetCollection: albumResult)
             self.navigationController?.pushViewController(assetCollectionViewController, animated: true)
+        case .collectionList:
+            guard let collectionList = PHCollectionList.fetchCollectionLists(with: .smartFolder, subtype: .any, options: nil).firstObject else {
+                return
+            }
+            let collectionListViewController = PHCollectionListViewController(collectionList: collectionList)
+            self.navigationController?.pushViewController(collectionListViewController, animated: true)
         case .album:
             fetchAlbum()
         case .smartAlbum:
@@ -75,6 +81,7 @@ private extension FetchCollectionViewController {
 
 enum FetchAlbumType: String {
     case assetCollection = "PHAssetCollection模型"
+    case collectionList = "PHCollectionList模型"
     case album = "相册"
     case smartAlbum = "智能相册"
     case momentAlbum = "时刻相册"

@@ -15,7 +15,7 @@ class BaseTableViewController: UIViewController {
     
     // MARK: - 公有属性
     lazy var tableView: UITableView = {
-        let temp = UITableView()
+        let temp = UITableView(frame: .zero, style: .grouped)
         temp.delegate = self
         temp.dataSource = self
         temp.rowHeight = 44

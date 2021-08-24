@@ -12,6 +12,7 @@
 		4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */; };
 		4FC182AC26C26CE700D91499 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */; };
 		4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */; };
+		4FD683A826D5173500A780D1 /* PHFetchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD683A726D5173500A780D1 /* PHFetchResultViewController.swift */; };
 		4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE526A6F52700799A74 /* AppDelegate.swift */; };
 		4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */; };
 		4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE926A6F52700799A74 /* ViewController.swift */; };
@@ -54,6 +55,7 @@
 		4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionViewController.swift; sourceTree = "<group>"; };
 		4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListViewController.swift; sourceTree = "<group>"; };
+		4FD683A726D5173500A780D1 /* PHFetchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHFetchResultViewController.swift; sourceTree = "<group>"; };
 		4FDBDCE226A6F52700799A74 /* PhotoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDBDCE526A6F52700799A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,21 @@
 				4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		4FC183D226D4D63200D91499 /* PHFetchResult */ = {
+			isa = PBXGroup;
+			children = (
+				4FD683A726D5173500A780D1 /* PHFetchResultViewController.swift */,
+			);
+			path = PHFetchResult;
+			sourceTree = "<group>";
+		};
+		4FC183D326D4D63D00D91499 /* PHFetchOptions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PHFetchOptions;
 			sourceTree = "<group>";
 		};
 		4FDBDCD926A6F52700799A74 = {
@@ -234,6 +251,8 @@
 				4FDBDD1E26A8033300799A74 /* AssetRetrievalViewController.swift */,
 				4F03CB4626B3AC5500A1268F /* PHAsset */,
 				4F03CB4726B3AC6200A1268F /* PHCollection */,
+				4FC183D326D4D63D00D91499 /* PHFetchOptions */,
+				4FC183D226D4D63200D91499 /* PHFetchResult */,
 			);
 			path = AssetRetrieval;
 			sourceTree = "<group>";
@@ -412,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FDBDD2826A81BFC00799A74 /* FetchAssetViewController.swift in Sources */,
+				4FD683A826D5173500A780D1 /* PHFetchResultViewController.swift in Sources */,
 				4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */,
 				4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */,
 				4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */,

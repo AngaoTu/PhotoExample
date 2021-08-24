@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Photos
 
 class AssetRetrievalViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataList = [FetchResourceType.album, FetchResourceType.asset]
+        self.dataList = [FetchResourceType.album, FetchResourceType.asset, FetchResourceType.fetchResult]
     }
     
     override func initView() {
@@ -43,6 +44,14 @@ extension AssetRetrievalViewController {
         case .asset:
             let fetchAssetViewController = FetchAssetViewController()
             self.navigationController?.pushViewController(fetchAssetViewController, animated: true)
+        case .fetchResult:
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+            let allAssets = PHAsset.fetchAssets(with: fetchOptions)
+            let fetchResultViewController = PHFetchResultViewController(fetchResult: allAssets)
+            self.navigationController?.pushViewController(fetchResultViewController, animated: true)
+        default:
+            break
         }
     }
 }
@@ -50,4 +59,6 @@ extension AssetRetrievalViewController {
 enum FetchResourceType: String {
     case album = "相册资源"
     case asset = "照片资源"
+    case fetchResult = "PHFetchResult"
+    case fetchOptions = "PHFetchOptions"
 }

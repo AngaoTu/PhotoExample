@@ -58,7 +58,7 @@ extension PHFetchResultViewController {
             var textString = ""
             switch type {
             case .count:
-                break
+                textString = count()
             default:
                 break
             }
@@ -69,19 +69,179 @@ extension PHFetchResultViewController {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultPropertyType else { return }
+            switch type {
+            case .firstObject:
+                firstObject()
+            case .lastObject:
+                lastObject()
+            default:
+                break
+            }
+        } else if indexPath.section == 1 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultFunctionType else { return }
+            switch type {
+            case .object:
+                object(type: type)
+            case .contains:
+                contains(type: type)
+            case .indexAnObject:
+                indexAnObject(type: type)
+            case .indexAnobjectInRange:
+                indexAnobjectInRange(type: type)
+            case .objects:
+                objects(type: type)
+            case .enumerateObjects:
+                enumerateObjects(type: type)
+            case .enumerateObjectsOptions:
+                enumerateObjectsOptions(type: type)
+            case .enumerateObjectsAt:
+                enumerateObjectsAt(type: type)
+            case .countOfAssets:
+                countOfAssets(type: type)
+            }
+        }
+    }
 }
 
 private extension PHFetchResultViewController {
     func count() -> String {
-        return ""
+        /*
+         @available(iOS 8, *)
+         open var count: Int { get }
+         */
+        return String(fetchResult.count)
     }
     
-    func firstObject() -> String {
-        return ""
+    func firstObject() {
+        /*
+         @available(iOS 8, *)
+         open var firstObject: ObjectType? { get }
+         */
+        let object = fetchResult.firstObject
+        ATLog("\(String(describing: object))")
     }
     
-    func lastObject() -> String {
-        return ""
+    func lastObject() {
+        /*
+         @available(iOS 8, *)
+         open var lastObject: ObjectType? { get }
+         */
+        let object = fetchResult.lastObject
+        ATLog("\(String(describing: object))")
+    }
+    
+    func object(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func object(at index: Int) -> ObjectType // 获取第几个元素 超出该相册数量范围，则直接崩溃
+         */
+        // 这里需要对范围进行预判
+        let object = fetchResult.object(at: 1)
+        ATLog("\(object)", funcName: type.rawValue)
+    }
+    
+    func contains(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func contains(_ anObject: ObjectType) -> Bool // 判断是否包含某个元素
+         */
+        // 先获取下标位1的元素，然后再进行判断
+        let object = fetchResult.object(at: 1)
+        let isHas = fetchResult.contains(object)
+        ATLog("\(isHas)", funcName: type.rawValue)
+    }
+    
+    func indexAnObject(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func index(of anObject: ObjectType) -> Int // 返回某个元素下标
+         */
+        let object = fetchResult.object(at: 1)
+        let index = fetchResult.index(of: object)
+        ATLog("\(index)", funcName: type.rawValue)
+    }
+    
+    func indexAnobjectInRange(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func index(of anObject: ObjectType, in range: NSRange) -> Int // 在某个范围中，返回某个元素下标
+         */
+        // 如果不在范围中，返回值为超大数值  9223372036854775807
+        // 在范围中，则返回范围值。所以在使用该方法需要对返回值进行判断
+        let object = fetchResult.object(at: 1)
+        let index = fetchResult.index(of: object, in: NSMakeRange(2, 2))
+        ATLog("\(index)", funcName: type.rawValue)
+    }
+    
+    func objects(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func objects(at indexes: IndexSet) -> [ObjectType] //
+         */
+        // 如果set中有不在范围中index，会直接抛出异常
+        let objects = fetchResult.objects(at: [1, 2])
+        ATLog("\(objects)", funcName: type.rawValue)
+    }
+    
+    func enumerateObjects(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func enumerateObjects(_ block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+         */
+        fetchResult.enumerateObjects { asset, index, stop in
+            if index == 2 {
+                stop.initialize(to: true)
+            }
+            ATLog("\(asset)", funcName: type.rawValue)
+        }
+    }
+    
+    func enumerateObjectsOptions(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func enumerateObjects(options opts: NSEnumerationOptions = [], using block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+         
+         
+         public struct NSEnumerationOptions : OptionSet {
+             public init(rawValue: UInt)
+             
+             public static var concurrent: NSEnumerationOptions { get } // 并行遍历
+
+             public static var reverse: NSEnumerationOptions { get } // 倒叙遍历
+         }
+         */
+        fetchResult.enumerateObjects(options: .concurrent) { asset, index, stop in
+            if index == 2 {
+                stop.initialize(to: true)
+            }
+            ATLog("index = \(index) \(asset)", funcName: type.rawValue)
+        }
+    }
+    
+    func enumerateObjectsAt(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func enumerateObjects(at s: IndexSet, options opts: NSEnumerationOptions = [], using block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+         */
+        fetchResult.enumerateObjects(at: [1, 2, 5, 6], options: .concurrent) { asset, index, stop in
+            if index == 2 {
+                stop.initialize(to: true)
+            }
+            ATLog("\(asset)", funcName: type.rawValue)
+        }
+    }
+    
+    func countOfAssets(type: PHFetchResultFunctionType) {
+        /*
+         @available(iOS 8, *)
+         open func countOfAssets(with mediaType: PHAssetMediaType) -> Int // 获取mediaType类型有多少元素
+         */
+        let count = fetchResult.countOfAssets(with: .video)
+        ATLog("\(count)", funcName: type.rawValue)
     }
 }
 

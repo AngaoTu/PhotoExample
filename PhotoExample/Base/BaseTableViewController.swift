@@ -43,3 +43,14 @@ extension BaseTableViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 }
+
+/// 全局函数
+func ATLog<T>(_ message:T, file:String = #file, funcName:String = #function, lineNum:Int = #line) {
+    
+    #if DEBUG
+    
+    let file = (file as NSString).lastPathComponent;
+    print("\n============🚩PhotoExample==========📄file:\(file)============\n ❗️func: \(funcName) \n \(message) \n==============================================\n");
+    
+    #endif
+}

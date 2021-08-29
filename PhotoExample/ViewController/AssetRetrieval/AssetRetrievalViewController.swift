@@ -50,8 +50,9 @@ extension AssetRetrievalViewController {
             let allAssets = PHAsset.fetchAssets(with: fetchOptions)
             let fetchResultViewController = PHFetchResultViewController(fetchResult: allAssets)
             self.navigationController?.pushViewController(fetchResultViewController, animated: true)
-        default:
-            break
+        case .fetchOptions:
+            let fetchOptionsViewController = PHFetchOptionsViewController()
+            self.navigationController?.pushViewController(fetchOptionsViewController, animated: true)
         }
     }
 }

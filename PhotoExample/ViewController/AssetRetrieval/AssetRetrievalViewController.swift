@@ -12,7 +12,7 @@ class AssetRetrievalViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataList = [FetchResourceType.album, FetchResourceType.asset, FetchResourceType.fetchResult]
+        self.dataList = [FetchResourceType.album, FetchResourceType.asset, FetchResourceType.fetchResult, FetchResourceType.fetchOptions]
     }
     
     override func initView() {

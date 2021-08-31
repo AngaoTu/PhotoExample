@@ -14,6 +14,8 @@
 		4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */; };
 		4FD683A826D5173500A780D1 /* PHFetchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD683A726D5173500A780D1 /* PHFetchResultViewController.swift */; };
 		4FD683DC26D6705800A780D1 /* PHFetchOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD683DB26D6705800A780D1 /* PHFetchOptionsViewController.swift */; };
+		4FD6840726DCFB8E00A780D1 /* PHImageManagerAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6840626DCFB8D00A780D1 /* PHImageManagerAssetLoading.swift */; };
+		4FD6840F26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6840E26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift */; };
 		4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE526A6F52700799A74 /* AppDelegate.swift */; };
 		4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */; };
 		4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDCE926A6F52700799A74 /* ViewController.swift */; };
@@ -58,6 +60,8 @@
 		4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListViewController.swift; sourceTree = "<group>"; };
 		4FD683A726D5173500A780D1 /* PHFetchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHFetchResultViewController.swift; sourceTree = "<group>"; };
 		4FD683DB26D6705800A780D1 /* PHFetchOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHFetchOptionsViewController.swift; sourceTree = "<group>"; };
+		4FD6840626DCFB8D00A780D1 /* PHImageManagerAssetLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHImageManagerAssetLoading.swift; sourceTree = "<group>"; };
+		4FD6840E26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHImageRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4FDBDCE226A6F52700799A74 /* PhotoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDBDCE526A6F52700799A74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FDBDCE726A6F52700799A74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +158,23 @@
 			path = PHFetchOptions;
 			sourceTree = "<group>";
 		};
+		4FD6840526DCFB4D00A780D1 /* AssetLoading */ = {
+			isa = PBXGroup;
+			children = (
+				4FD6840D26DE5CB600A780D1 /* RequestOptions */,
+				4FD6840626DCFB8D00A780D1 /* PHImageManagerAssetLoading.swift */,
+			);
+			path = AssetLoading;
+			sourceTree = "<group>";
+		};
+		4FD6840D26DE5CB600A780D1 /* RequestOptions */ = {
+			isa = PBXGroup;
+			children = (
+				4FD6840E26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift */,
+			);
+			path = RequestOptions;
+			sourceTree = "<group>";
+		};
 		4FDBDCD926A6F52700799A74 = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +263,7 @@
 				4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */,
 				4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */,
 				4FDBDD1D26A8031700799A74 /* AssetRetrieval */,
+				4FD6840526DCFB4D00A780D1 /* AssetLoading */,
 				4FDBDD1526A7012600799A74 /* ChangeObserver */,
 				4FDBDD1626A7018600799A74 /* ModifyResource */,
 			);
@@ -439,6 +461,7 @@
 				4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */,
 				4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */,
 				4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */,
+				4FD6840726DCFB8E00A780D1 /* PHImageManagerAssetLoading.swift in Sources */,
 				4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */,
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
 				4FD683DC26D6705800A780D1 /* PHFetchOptionsViewController.swift in Sources */,
@@ -451,6 +474,7 @@
 				4FDBDD2526A80F3100799A74 /* AlbumListViewController.swift in Sources */,
 				4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */,
 				4FDBDD2326A80CBE00799A74 /* AlbumListTableViewCell.swift in Sources */,
+				4FD6840F26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

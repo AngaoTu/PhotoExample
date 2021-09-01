@@ -7,8 +7,20 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class PHImageRequestOptionsViewController: BaseTableViewController {
+    // MARK: - initalization
+    init() {
+        self.imageRequestOptions = PHImageRequestOptions()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         dataList = [PHImageRequestOptionsPropertyType.version, PHImageRequestOptionsPropertyType.deliveryMode, PHImageRequestOptionsPropertyType.resizeMode, PHImageRequestOptionsPropertyType.normalizedCropRect, PHImageRequestOptionsPropertyType.isNetworkAccessAllowed, PHImageRequestOptionsPropertyType.isSynchronous, PHImageRequestOptionsPropertyType.progressHandler]
@@ -19,6 +31,9 @@ class PHImageRequestOptionsViewController: BaseTableViewController {
         self.title = "PHImageRequestOptions模型"
         tableView.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
     }
+    
+    // MARK: - 私有属性
+    private let imageRequestOptions: PHImageRequestOptions
 }
 
 extension PHImageRequestOptionsViewController {
@@ -34,19 +49,19 @@ extension PHImageRequestOptionsViewController {
         var textString = ""
         switch type {
         case .version:
-        break
+            textString = version()
         case .deliveryMode:
-        break
+            textString = deliveryMode()
         case .resizeMode:
-        break
+            textString = resizeMode()
         case .normalizedCropRect:
-        break
+            textString = normalizedCropRect()
         case .isNetworkAccessAllowed:
-            break
+            textString = isNetworkAccessAllowed()
         case .isSynchronous:
-            break
+            textString = isSynchronous()
         case .progressHandler:
-            break
+            textString = progressHandler()
         }
         cell.textString = "\(type):\n\(textString)"
         return cell
@@ -73,7 +88,83 @@ private extension PHImageRequestOptionsViewController {
          @available(iOS 8, *)
          open var version: PHImageRequestOptionsVersion // 图片版本
          */
-        return ""
+        return "\(imageRequestOptions.version)"
+    }
+    
+    func deliveryMode() -> String {
+        /*
+         @available(iOS 8, iOS 8, *)
+         public enum PHImageRequestOptionsDeliveryMode : Int {
+
+             
+             @available(iOS 8, *)
+             case opportunistic = 0 // 平衡图像质量和响应速度，可能会返回一个或者多个结果
+
+             @available(iOS 8, *)
+             case highQualityFormat = 1 // 只会返回最高质量图像
+
+             @available(iOS 8, *)
+             case fastFormat = 2 // 最快速度得到一个图像结果，可能会牺牲图像质量
+         }
+         
+         @available(iOS 8, *)
+         open var deliveryMode: PHImageRequestOptionsDeliveryMode // 图片交付模式，默认是opportunistic
+         */
+        return "\(imageRequestOptions.deliveryMode)"
+    }
+    
+    func resizeMode() -> String {
+        /*
+         @available(iOS 8, iOS 8, *)
+         public enum PHImageRequestOptionsResizeMode : Int {
+
+             @available(iOS 8, *)
+             case none = 0 // 不做任何调整
+         
+             @available(iOS 8, *)
+             case fast = 1 // 最快速的调整图像，有可能比给定大小略大
+
+             @available(iOS 8, *)
+             case exact = 2 // 与给定大小一致，如果使用normalizedCropRect属性，则必须指定为该模式。
+         }
+         
+         @available(iOS 8, *)
+         open var resizeMode: PHImageRequestOptionsResizeMode // 请求图像的大小，默认为fast
+         */
+        return "\(imageRequestOptions.resizeMode)"
+    }
+    
+    func normalizedCropRect() -> String {
+        /*
+         @available(iOS 8, *)
+         open var normalizedCropRect: CGRect // 是否对原图进行裁剪
+         // 如果你指定了裁剪的矩形，那么你必须对resizeMode属性设置为.exact
+         */
+        return "\(imageRequestOptions.normalizedCropRect)"
+    }
+    
+    func isNetworkAccessAllowed() -> String {
+        /*
+         @available(iOS 8, *)
+         open var isNetworkAccessAllowed: Bool // 是否可以从iCloud中下载图片，默认为false
+         */
+        return "\(imageRequestOptions.isNetworkAccessAllowed)"
+    }
+    
+    func isSynchronous() -> String {
+        /*
+         @available(iOS 8, *)
+         open var isSynchronous: Bool // 是否同步请求照片，默认是NO
+         */
+        return "\(imageRequestOptions.isSynchronous)"
+    }
+    
+    func progressHandler() -> String {
+        /*
+         @available(iOS 8, *)
+         open var progressHandler: PHAssetImageProgressHandler? // 从icloud下载图片是，会定期返回下载进度
+         */
+        return "\(String(describing: imageRequestOptions.progressHandler))"
     }
 }
 

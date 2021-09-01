@@ -88,7 +88,18 @@ private extension PHImageRequestOptionsViewController {
          @available(iOS 8, *)
          open var version: PHImageRequestOptionsVersion // 图片版本
          */
-        return "\(imageRequestOptions.version)"
+        var text = ""
+        switch imageRequestOptions.version {
+        case .current:
+            text = "current"
+        case .unadjusted:
+            text = "unadjusted"
+        case .original:
+            text = "original"
+        default:
+            break
+        }
+        return text
     }
     
     func deliveryMode() -> String {
@@ -110,7 +121,18 @@ private extension PHImageRequestOptionsViewController {
          @available(iOS 8, *)
          open var deliveryMode: PHImageRequestOptionsDeliveryMode // 图片交付模式，默认是opportunistic
          */
-        return "\(imageRequestOptions.deliveryMode)"
+        var text = ""
+        switch imageRequestOptions.deliveryMode {
+        case .opportunistic:
+            text = "opportunistic"
+        case .highQualityFormat:
+            text = "highQualityFormat"
+        case .fastFormat:
+            text = "fastFormat"
+        default:
+            break
+        }
+        return text
     }
     
     func resizeMode() -> String {
@@ -131,7 +153,18 @@ private extension PHImageRequestOptionsViewController {
          @available(iOS 8, *)
          open var resizeMode: PHImageRequestOptionsResizeMode // 请求图像的大小，默认为fast
          */
-        return "\(imageRequestOptions.resizeMode)"
+        var text = ""
+        switch imageRequestOptions.resizeMode {
+        case .none:
+            text = "none"
+        case .fast:
+            text = "fast"
+        case .exact:
+            text = "exact"
+        default:
+            break
+        }
+        return text
     }
     
     func normalizedCropRect() -> String {

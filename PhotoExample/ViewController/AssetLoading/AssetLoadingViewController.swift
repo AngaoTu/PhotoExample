@@ -12,7 +12,7 @@ class AssetLoadingViewContoller: BaseTableViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [AssetLoadingType.imageRequet, AssetLoadingType.livePhotoRequest, AssetLoadingType.videoRequest, AssetLoadingType.PHImageManager, AssetLoadingType.PHCachingImageManager]
+        dataList = [AssetLoadingType.PHImageRequetOptions, AssetLoadingType.PHLivePhotoRequestOptions, AssetLoadingType.PHVideoRequestOptions, AssetLoadingType.PHImageManager, AssetLoadingType.PHCachingImageManager]
     }
     
     override func initView() {
@@ -42,9 +42,12 @@ extension AssetLoadingViewContoller {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let type = dataList[indexPath.row] as? AssetLoadingType else { return }
         switch type {
-        case .imageRequet:
+        case .PHImageRequetOptions:
             let imageRequestViewController = PHImageRequestOptionsViewController()
             self.navigationController?.pushViewController(imageRequestViewController, animated: true)
+        case .PHLivePhotoRequestOptions:
+            let livePhotoViewController = PHLivePhotoRequestOptionsViewController()
+            self.navigationController?.pushViewController(livePhotoViewController, animated: true)
         default:
             break
         }
@@ -52,9 +55,9 @@ extension AssetLoadingViewContoller {
 }
 
 private enum AssetLoadingType: String {
-    case imageRequet
-    case livePhotoRequest
-    case videoRequest
+    case PHImageRequetOptions
+    case PHLivePhotoRequestOptions
+    case PHVideoRequestOptions
     case PHImageManager
     case PHCachingImageManager
 }

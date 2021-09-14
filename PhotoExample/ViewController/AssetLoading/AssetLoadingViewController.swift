@@ -48,6 +48,9 @@ extension AssetLoadingViewContoller {
         case .PHLivePhotoRequestOptions:
             let livePhotoViewController = PHLivePhotoRequestOptionsViewController()
             self.navigationController?.pushViewController(livePhotoViewController, animated: true)
+        case .PHVideoRequestOptions:
+            let videoViewController = PHVideoRequestOptionsViewController()
+            self.navigationController?.pushViewController(videoViewController, animated: true)
         default:
             break
         }

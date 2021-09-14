@@ -10,6 +10,7 @@
 		24234572EDF8A320B1C6040B /* libPods-PhotoExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58932F0E06E4E6B36E6137F9 /* libPods-PhotoExample.a */; };
 		4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1526AE951100A1268F /* PHAssetViewController.swift */; };
 		4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */; };
+		4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */; };
 		4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */; };
 		4FC182AC26C26CE700D91499 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */; };
 		4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */; };
@@ -58,6 +59,7 @@
 		11F72804832D263202329519 /* Pods-PhotoExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoExample.release.xcconfig"; path = "Target Support Files/Pods-PhotoExample/Pods-PhotoExample.release.xcconfig"; sourceTree = "<group>"; };
 		4F03CB1526AE951100A1268F /* PHAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetViewController.swift; sourceTree = "<group>"; };
 		4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionViewController.swift; sourceTree = "<group>"; };
+		4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHVideoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHLivePhotoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				4FD6840E26DE5CD300A780D1 /* PHImageRequestOptionsViewController.swift */,
 				4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */,
+				4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */,
 			);
 			path = RequestOptions;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */,
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
 				4FD6841626DFA10900A780D1 /* AssetLoadingViewController.swift in Sources */,
+				4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */,
 				4FD683DC26D6705800A780D1 /* PHFetchOptionsViewController.swift in Sources */,
 				4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */,
 				4FDBDD2126A805CC00799A74 /* FetchCollectionViewController.swift in Sources */,

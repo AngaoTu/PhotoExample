@@ -23,7 +23,7 @@ class PHFetchResultViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataList = [[PHFetchResultPropertyType.count, PHFetchResultPropertyType.firstObject, PHFetchResultPropertyType.lastObject],
-                         [PHFetchResultFunctionType.object, PHFetchResultFunctionType.contains, PHFetchResultFunctionType.indexAnObject, PHFetchResultFunctionType.indexAnobjectInRange, PHFetchResultFunctionType.objects, PHFetchResultFunctionType.enumerateObjects, PHFetchResultFunctionType.enumerateObjectsOptions, PHFetchResultFunctionType.enumerateObjectsAt, PHFetchResultFunctionType.countOfAssets]]
+                         [PHFetchResultMethodType.object, PHFetchResultMethodType.contains, PHFetchResultMethodType.indexAnObject, PHFetchResultMethodType.indexAnobjectInRange, PHFetchResultMethodType.objects, PHFetchResultMethodType.enumerateObjects, PHFetchResultMethodType.enumerateObjectsOptions, PHFetchResultMethodType.enumerateObjectsAt, PHFetchResultMethodType.countOfAssets]]
     }
     
     override func initView() {
@@ -64,7 +64,7 @@ extension PHFetchResultViewController {
             }
             cell.textString = "\(type): \(textString)"
         } else if indexPath.section == 1 {
-            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultFunctionType else { return UITableViewCell () }
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultMethodType else { return UITableViewCell () }
             cell.textString = "\(type.rawValue)"
         }
         return cell
@@ -82,7 +82,7 @@ extension PHFetchResultViewController {
                 break
             }
         } else if indexPath.section == 1 {
-            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultFunctionType else { return }
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHFetchResultMethodType else { return }
             switch type {
             case .object:
                 object(type: type)
@@ -107,7 +107,9 @@ extension PHFetchResultViewController {
     }
 }
 
+// MARK: - Private Method
 private extension PHFetchResultViewController {
+    // MARK: Propries
     func count() -> String {
         /*
          @available(iOS 8, *)
@@ -134,7 +136,8 @@ private extension PHFetchResultViewController {
         ATLog("\(String(describing: object))")
     }
     
-    func object(type: PHFetchResultFunctionType) {
+    // MARK: Methods
+    func object(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func object(at index: Int) -> ObjectType // 获取第几个元素 超出该相册数量范围，则直接崩溃
@@ -144,7 +147,7 @@ private extension PHFetchResultViewController {
         ATLog("\(object)", funcName: type.rawValue)
     }
     
-    func contains(type: PHFetchResultFunctionType) {
+    func contains(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func contains(_ anObject: ObjectType) -> Bool // 判断是否包含某个元素
@@ -155,7 +158,7 @@ private extension PHFetchResultViewController {
         ATLog("\(isHas)", funcName: type.rawValue)
     }
     
-    func indexAnObject(type: PHFetchResultFunctionType) {
+    func indexAnObject(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func index(of anObject: ObjectType) -> Int // 返回某个元素下标
@@ -165,7 +168,7 @@ private extension PHFetchResultViewController {
         ATLog("\(index)", funcName: type.rawValue)
     }
     
-    func indexAnobjectInRange(type: PHFetchResultFunctionType) {
+    func indexAnobjectInRange(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func index(of anObject: ObjectType, in range: NSRange) -> Int // 在某个范围中，返回某个元素下标
@@ -177,7 +180,7 @@ private extension PHFetchResultViewController {
         ATLog("\(index)", funcName: type.rawValue)
     }
     
-    func objects(type: PHFetchResultFunctionType) {
+    func objects(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func objects(at indexes: IndexSet) -> [ObjectType] //
@@ -187,7 +190,7 @@ private extension PHFetchResultViewController {
         ATLog("\(objects)", funcName: type.rawValue)
     }
     
-    func enumerateObjects(type: PHFetchResultFunctionType) {
+    func enumerateObjects(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func enumerateObjects(_ block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
@@ -200,7 +203,7 @@ private extension PHFetchResultViewController {
         }
     }
     
-    func enumerateObjectsOptions(type: PHFetchResultFunctionType) {
+    func enumerateObjectsOptions(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func enumerateObjects(options opts: NSEnumerationOptions = [], using block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
@@ -222,7 +225,7 @@ private extension PHFetchResultViewController {
         }
     }
     
-    func enumerateObjectsAt(type: PHFetchResultFunctionType) {
+    func enumerateObjectsAt(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func enumerateObjects(at s: IndexSet, options opts: NSEnumerationOptions = [], using block: @escaping (ObjectType, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
@@ -235,7 +238,7 @@ private extension PHFetchResultViewController {
         }
     }
     
-    func countOfAssets(type: PHFetchResultFunctionType) {
+    func countOfAssets(type: PHFetchResultMethodType) {
         /*
          @available(iOS 8, *)
          open func countOfAssets(with mediaType: PHAssetMediaType) -> Int // 获取mediaType类型有多少元素
@@ -251,7 +254,7 @@ private enum PHFetchResultPropertyType: String {
     case lastObject
 }
 
-private enum PHFetchResultFunctionType: String {
+private enum PHFetchResultMethodType: String {
     case object = "object(at index: Int) -> ObjectType"
     case contains = "contains(_ anObject: ObjectType) -> Bool"
     case indexAnObject = "index(of anObject: ObjectType) -> Int"

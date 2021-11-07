@@ -61,18 +61,22 @@ private extension FetchAssetViewController {
     
     func fetchAllAssets() {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let allAssets = PHAsset.fetchAssets(with: fetchOptions)
         skipAssetListViewController(fetchResult: allAssets)
     }
     
     func fetchImageAssets() {
-        let imageAssets = PHAsset.fetchAssets(with: .image, options: nil)
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let imageAssets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         skipAssetListViewController(fetchResult: imageAssets)
     }
     
     func fetchVedioAssets() {
-        let vedioAssets = PHAsset.fetchAssets(with: .video, options: nil)
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let vedioAssets = PHAsset.fetchAssets(with: .video, options: fetchOptions)
         skipAssetListViewController(fetchResult: vedioAssets)
     }
     

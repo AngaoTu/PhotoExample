@@ -22,7 +22,9 @@ class PHAssetViewController: BaseTableViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [PHAssetPropertyType.localIdentifier, PHAssetPropertyType.playbackStyle, PHAssetPropertyType.mediaType, PHAssetPropertyType.mediaSubtypes, PHAssetPropertyType.pixelWidth, PHAssetPropertyType.pixeHeight, PHAssetPropertyType.creationDate, PHAssetPropertyType.modificationDate, PHAssetPropertyType.location, PHAssetPropertyType.duration, PHAssetPropertyType.isHidden, PHAssetPropertyType.isFavorite, PHAssetPropertyType.burstIdentifier, PHAssetPropertyType.burstSelectionTypes, PHAssetPropertyType.representBurst, PHAssetPropertyType.sourceType]
+        dataList = [
+            [PHAssetPropertyType.localIdentifier, PHAssetPropertyType.playbackStyle, PHAssetPropertyType.mediaType, PHAssetPropertyType.mediaSubtypes, PHAssetPropertyType.pixelWidth, PHAssetPropertyType.pixeHeight, PHAssetPropertyType.creationDate, PHAssetPropertyType.modificationDate, PHAssetPropertyType.location, PHAssetPropertyType.duration, PHAssetPropertyType.isHidden, PHAssetPropertyType.isFavorite, PHAssetPropertyType.burstIdentifier, PHAssetPropertyType.burstSelectionTypes, PHAssetPropertyType.representBurst, PHAssetPropertyType.sourceType],
+                    [PHAssetMethodType.fetchAssetsInAssetCollection, PHAssetMethodType.fetchAssetsWithIdentifiers, PHAssetMethodType.fetchKeyAssetsInAssetCollection, PHAssetMethodType.fetchAssetsWithBurstIdentidier, PHAssetMethodType.fetchAssetsWithOptions, PHAssetMethodType.fetchAssetsWithMediaType]]
     }
     
     override func initView() {
@@ -38,61 +40,98 @@ class PHAssetViewController: BaseTableViewController {
 
 extension PHAssetViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let items = dataList[section] as? [Any] else {
+            return 0
+        }
+        return items.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell,
-              let type = dataList[indexPath.row] as? PHAssetPropertyType else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
             return UITableViewCell()
         }
         
-        var textString = ""
-        switch type {
-        case .localIdentifier:
-            textString = localIdentifier()
-        case .playbackStyle:
-            textString = playbackStyle()
-        case .mediaType:
-            textString = mediaType()
-        case .mediaSubtypes:
-            textString = mediaSubtypes()
-        case .pixelWidth:
-            guard let width = currentAsset?.pixelWidth else { break }
-            textString = "\(width)"
-        case .pixeHeight:
-            guard let height = currentAsset?.pixelHeight else { break }
-            textString = "\(height)"
-        case .creationDate:
-            textString = creationDate()
-        case .modificationDate:
-            textString = modificationDate()
-        case .location:
-            textString = location()
-        case .duration:
-            textString = duration()
-        case .isHidden:
-            guard let isHidden = currentAsset?.isHidden else { break }
-            textString = "\(isHidden)"
-        case .isFavorite:
-            guard let isFavorite = currentAsset?.isFavorite else { break }
-            textString = "\(isFavorite)"
-        case .burstIdentifier:
-            textString = burstIdentifier()
-        case .burstSelectionTypes:
-            textString = burstSelectionTypes()
-        case .representBurst:
-            textString = representsBurst()
-        case .sourceType:
-            textString = sourceType()
+        if indexPath.section == 0 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetPropertyType else { return UITableViewCell () }
+            
+            var textString = ""
+            switch type {
+            case .localIdentifier:
+                textString = localIdentifier()
+            case .playbackStyle:
+                textString = playbackStyle()
+            case .mediaType:
+                textString = mediaType()
+            case .mediaSubtypes:
+                textString = mediaSubtypes()
+            case .pixelWidth:
+                guard let width = currentAsset?.pixelWidth else { break }
+                textString = "\(width)"
+            case .pixeHeight:
+                guard let height = currentAsset?.pixelHeight else { break }
+                textString = "\(height)"
+            case .creationDate:
+                textString = creationDate()
+            case .modificationDate:
+                textString = modificationDate()
+            case .location:
+                textString = location()
+            case .duration:
+                textString = duration()
+            case .isHidden:
+                guard let isHidden = currentAsset?.isHidden else { break }
+                textString = "\(isHidden)"
+            case .isFavorite:
+                guard let isFavorite = currentAsset?.isFavorite else { break }
+                textString = "\(isFavorite)"
+            case .burstIdentifier:
+                textString = burstIdentifier()
+            case .burstSelectionTypes:
+                textString = burstSelectionTypes()
+            case .representBurst:
+                textString = representsBurst()
+            case .sourceType:
+                textString = sourceType()
+            }
+            
+            ATLog("\(textString)")
+            cell.textString = "\(type.rawValue): \(textString)"
+        } else if indexPath.section == 1 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetMethodType else { return UITableViewCell () }
+            cell.textString = "\(type.rawValue)"
         }
         
-        cell.textString = "\(type.rawValue): \(textString)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetMethodType else { return }
+            switch type {
+            case .fetchAssetsInAssetCollection:
+                fetchAssetsInAssetCollection(type: type)
+            case .fetchAssetsWithIdentifiers:
+                fetchAssetsWithIdentifiers(type: type)
+            case .fetchKeyAssetsInAssetCollection:
+                fetchKeyAssetsInAssetCollection(type: type)
+            case .fetchAssetsWithOptions:
+                fetchAssetsWithOptions(type: type)
+            case .fetchAssetsWithMediaType:
+                fetchAssetsWithMediaType(type: type)
+            case .fetchAssetsWithBurstIdentidier:
+                fetchAssetsWithBurstIdentidier(type: type)
+            }
+        }
     }
 }
 
+// MARK: - Private Method
 private extension PHAssetViewController {
+    // MARK: Properties
     func localIdentifier() -> String {
         /*
          // 由于PHAsset继承PHObject，所以它第一个属性应该是localIdentifier，也就是该资源唯一标识符
@@ -358,7 +397,119 @@ private extension PHAssetViewController {
         }
         return sourceTypeString
     }
+    
+    // MARK: Metheds
+    func fetchAssetsInAssetCollection(type: PHAssetMethodType) {
+        /*
+         // 从指定的资产集合中检索资产
+         @available(iOS 8, *)
+         open class func fetchAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>
+         */
+        
+        // 先获取一个相册
+        guard let lastAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).lastObject else { return }
+        // 然后再获取该相册中图片
+        let assets = PHAsset.fetchAssets(in: lastAlbum, options: nil)
+        skipAssetListViewController(fetchResult: assets)
+        ATLog("获取最后一个相册中的资源", funcName: type.rawValue)
+    }
+    
+    func fetchAssetsWithIdentifiers(type: PHAssetMethodType) {
+        /*
+         // 检索具有指定的本地设备特定唯一标识符的资产
+         @available(iOS 8, *)
+         open class func fetchAssets(withLocalIdentifiers identifiers: [String], options: PHFetchOptions?) -> PHFetchResult<PHAsset> // includes hidden assets by default
+         */
+        
+        // 这是为了举一个通过localIdentifier来获取PHAsset例子，由于没有现成的localIdentifier，所以采用以下方式绕了一个圈
+        // 先获取一个相册
+        guard let firstAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).firstObject else { return }
+        // 先获取该相册所有asset
+        let assets = PHAsset.fetchAssets(in: firstAlbum, options: nil)
+        // 再获取该相册中所有图片的localIdentifier
+        var localIdentifiers: [String] = []
+        for i in 0..<assets.count {
+            let asset = assets[i]
+            localIdentifiers.append(asset.localIdentifier)
+        }
+        // 再通过localIdentifers来获取对应的图片
+        let assetsByLocalIdentifiers = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil)
+        skipAssetListViewController(fetchResult: assetsByLocalIdentifiers)
+        ATLog("通过本地标识符集合来获取图片数据", funcName: type.rawValue)
+    }
+    
+    func fetchKeyAssetsInAssetCollection(type: PHAssetMethodType) {
+        /*
+         // 获取某个资产合集中关键资产
+         @available(iOS 8, *)
+         open class func fetchKeyAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>?
+         */
+        
+        // 先获取一个相册
+        guard let lastAlbum = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil).lastObject else { return }
+        // 然后再获取该相册中图片
+        guard let assets = PHAsset.fetchKeyAssets(in: lastAlbum, options: nil) else { return }
+        skipAssetListViewController(fetchResult: assets)
+        ATLog("检索在指定资产集合中标记为关键资产的资产", funcName: type.rawValue)
+    }
+    
+    func fetchAssetsWithBurstIdentidier(type: PHAssetMethodType) {
+        /*
+         // 检索具有指定连拍照片序列标识符的资产
+         // 默认情况下，返回的对象仅包含代表性资产和任何用户从连拍序列中挑选的照片。如果要检索连拍序列中的所有照片，请提供一个包含过滤谓词的对象，PHFetchResult中includeAllBurstAssets设置为true
+         @available(iOS 8, *)
+         open class func fetchAssets(withBurstIdentifier burstIdentifier: String, options: PHFetchOptions?) -> PHFetchResult<PHAsset>
+         */
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.includeAllBurstAssets = true
+        
+        // 这里直接挑选手机中连拍照片，然后获取他的identifier
+        let burstIdentifier = "12E9222C-757A-4D89-AC52-8865FFD3D5CF"
+        let assets = PHAsset.fetchAssets(withBurstIdentifier: burstIdentifier, options: fetchOptions)
+        skipAssetListViewController(fetchResult: assets)
+        ATLog("通过连拍标识符来获取一组连拍图片", funcName: type.rawValue)
+    }
+    
+    func fetchAssetsWithOptions(type: PHAssetMethodType) {
+        /*
+         // 通过检索条件来获取资源
+         // 默认情况下是拉取PHAssetSourceTypeUserLibrary中资源，你可以在PHFetchOptions中includeAssetSourceTypes修改拉取类别
+         @available(iOS 8, *)
+         open class func fetchAssets(with options: PHFetchOptions?) -> PHFetchResult<PHAsset>
+         */
+        
+        // 检索条件：创建时间的倒叙
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let allAssets = PHAsset.fetchAssets(with: fetchOptions)
+        skipAssetListViewController(fetchResult: allAssets)
+        ATLog("通过检索条件来获取图片", funcName: type.rawValue)
+    }
+    
+    func fetchAssetsWithMediaType(type: PHAssetMethodType) {
+        /*
+         // 通过媒体类别来获取资源
+         @available(iOS 8, *)
+         open class func fetchAssets(with mediaType: PHAssetMediaType, options: PHFetchOptions?) -> PHFetchResult<PHAsset>
+         */
+        
+        // 获取视频类别的资源
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let vedioAssets = PHAsset.fetchAssets(with: .video, options: fetchOptions)
+        skipAssetListViewController(fetchResult: vedioAssets)
+        ATLog("获取具体媒体类型的图片", funcName: type.rawValue)
+    }
+    
+    // MARK: Others
+    func skipAssetListViewController(fetchResult: PHFetchResult<PHAsset>) {
+        let assetListViewController = AssetListViewController(fetchResult: fetchResult)
+        self.navigationController?.pushViewController(assetListViewController, animated: true)
+    }
 }
+
 private enum PHAssetPropertyType: String {
     case localIdentifier
     case playbackStyle
@@ -376,4 +527,13 @@ private enum PHAssetPropertyType: String {
     case burstSelectionTypes
     case representBurst
     case sourceType
+}
+
+private enum PHAssetMethodType: String {
+    case fetchAssetsInAssetCollection = "fetchAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>"
+    case fetchAssetsWithIdentifiers = "fetchAssets(withLocalIdentifiers identifiers: [String], options: PHFetchOptions?) -> PHFetchResult<PHAsset> "
+    case fetchKeyAssetsInAssetCollection = "fetchKeyAssets(in assetCollection: PHAssetCollection, options: PHFetchOptions?) -> PHFetchResult<PHAsset>?"
+    case fetchAssetsWithBurstIdentidier = "fetchAssets(withBurstIdentifier burstIdentifier: String, options: PHFetchOptions?) -> PHFetchResult<PHAsset>"
+    case fetchAssetsWithOptions = "fetchAssets(with options: PHFetchOptions?) -> PHFetchResult<PHAsset"
+    case fetchAssetsWithMediaType = "fetchAssets(with mediaType: PHAssetMediaType, options: PHFetchOptions?) -> PHFetchResult<PHAsset>"
 }

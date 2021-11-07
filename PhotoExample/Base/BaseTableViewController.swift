@@ -50,7 +50,7 @@ func ATLog<T>(_ message:T, file:String = #file, funcName:String = #function, lin
     #if DEBUG
     
     let file = (file as NSString).lastPathComponent;
-    print("\n============🚩PhotoExample==========📄file:\(file)============\n ❗️func: \(funcName) \n \(message) \n==============================================\n");
+    print("\n============🚩PhotoExample==========📄file:\(file)============\n ❗️func: \(funcName) \n\n \(message) \n==============================================\n");
     
     #endif
 }

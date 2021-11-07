@@ -10,9 +10,10 @@ import Photos
 
 class PHAssetViewController: BaseTableViewController {
     // MARK: - initialization
-    init(asset: PHAsset) {
-        super.init(nibName: nil, bundle: nil)
+    init(asset: PHAsset, isShowMethod: Bool) {
         self.currentAsset = asset
+        self.isShowMethod = isShowMethod
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +37,7 @@ class PHAssetViewController: BaseTableViewController {
     
     // MARK: - 私有属性
     private var currentAsset: PHAsset?
+    private var isShowMethod: Bool
 }
 
 extension PHAssetViewController {
@@ -47,7 +49,7 @@ extension PHAssetViewController {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataList.count
+        return isShowMethod ? dataList.count : 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +100,6 @@ extension PHAssetViewController {
                 textString = sourceType()
             }
             
-            ATLog("\(textString)")
             cell.textString = "\(type.rawValue): \(textString)"
         } else if indexPath.section == 1 {
             guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetMethodType else { return UITableViewCell () }

@@ -69,7 +69,7 @@ extension AssetListViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let asset = dataList?[indexPath.row] else { return }
-        let assetModelViewController = PHAssetViewController(asset: asset)
+        let assetModelViewController = PHAssetViewController(asset: asset, isShowMethod: false)
         self.navigationController?.pushViewController(assetModelViewController, animated: true)
     }
 }

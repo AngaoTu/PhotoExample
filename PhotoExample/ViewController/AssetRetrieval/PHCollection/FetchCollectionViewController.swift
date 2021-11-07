@@ -11,7 +11,7 @@ import Photos
 class FetchCollectionViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataList = [FetchAlbumType.assetCollection, FetchAlbumType.collectionList, FetchAlbumType.album, FetchAlbumType.smartAlbum, FetchAlbumType.momentAlbum]
+        self.dataList = [FetchAlbumType.collection, FetchAlbumType.assetCollection, FetchAlbumType.collectionList, FetchAlbumType.album, FetchAlbumType.smartAlbum, FetchAlbumType.momentAlbum]
     }
     
     override func initView() {
@@ -36,6 +36,10 @@ extension FetchCollectionViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let type = dataList[indexPath.row] as? FetchAlbumType else { return }
         switch type {
+        case .collection:
+            guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil).firstObject else { return }
+            let assetCollectionViewController =  PHCollectionViewController(assetCollection: albumResult)
+            self.navigationController?.pushViewController(assetCollectionViewController, animated: true)
         case .assetCollection:
             guard let albumResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil).firstObject else { return }
             let assetCollectionViewController = PHAssetCollectionViewController(assetCollection: albumResult)
@@ -80,6 +84,7 @@ private extension FetchCollectionViewController {
 }
 
 enum FetchAlbumType: String {
+    case collection = "PHCollection模型"
     case assetCollection = "PHAssetCollection模型"
     case collectionList = "PHCollectionList模型"
     case album = "相册"

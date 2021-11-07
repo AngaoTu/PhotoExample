@@ -23,7 +23,7 @@ class PHAssetCollectionViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initView()
-        self.dataList = [PHAssetCollectionPropertyType.canContainAssets, PHAssetCollectionPropertyType.canContainCollection, PHAssetCollectionPropertyType.localizedTitle, PHAssetCollectionPropertyType.assetCollectionType, PHAssetCollectionPropertyType.assetCollectionSubtype, PHAssetCollectionPropertyType.estimatedAssetCount, PHAssetCollectionPropertyType.startDate, PHAssetCollectionPropertyType.endDate, PHAssetCollectionPropertyType.approximatedLocation, PHAssetCollectionPropertyType.localizedLocationNames]
+        self.dataList = [PHAssetCollectionPropertyType.assetCollectionType, PHAssetCollectionPropertyType.assetCollectionSubtype, PHAssetCollectionPropertyType.estimatedAssetCount, PHAssetCollectionPropertyType.startDate, PHAssetCollectionPropertyType.endDate, PHAssetCollectionPropertyType.approximatedLocation, PHAssetCollectionPropertyType.localizedLocationNames]
     }
     
     override func initView() {
@@ -48,12 +48,6 @@ extension PHAssetCollectionViewController {
         }
         var textString = ""
         switch type {
-        case .canContainAssets:
-            textString = canContainAssets()
-        case .canContainCollection:
-            textString = canContainCollection()
-        case .localizedTitle:
-            textString = localizedTitle()
         case .assetCollectionType:
             textString = assetCollectionType()
         case .assetCollectionSubtype:
@@ -75,30 +69,6 @@ extension PHAssetCollectionViewController {
 }
 
 private extension PHAssetCollectionViewController {
-    func canContainAssets() -> String {
-        /*
-         // 能否包含Assets
-         open var canContainAssets: Bool { get }
-         */
-        return currentAssetCollection.canContainAssets ? "ture" : "false"
-    }
-    
-    func canContainCollection() -> String {
-        /*
-         // 能否包含集合
-         open var canContainCollections: Bool { get }
-         */
-        return currentAssetCollection.canContainCollections ? "true" : "false"
-    }
-    
-    func localizedTitle() -> String {
-        /*
-         // 标题
-         open var localizedTitle: String? { get }
-         */
-        return currentAssetCollection.localizedTitle ?? ""
-    }
-    
     func assetCollectionType() -> String {
         /*
          // 集合类型
@@ -274,11 +244,6 @@ private extension PHAssetCollectionViewController {
 }
 
 private enum PHAssetCollectionPropertyType: String {
-    // 继承于PHCollection属性
-    case canContainAssets
-    case canContainCollection
-    case localizedTitle
-    // PHAssetCollection属性
     case assetCollectionType
     case assetCollectionSubtype
     case estimatedAssetCount

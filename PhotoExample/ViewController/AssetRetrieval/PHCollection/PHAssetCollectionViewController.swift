@@ -23,7 +23,7 @@ class PHAssetCollectionViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initView()
-        self.dataList = [PHAssetCollectionPropertyType.assetCollectionType, PHAssetCollectionPropertyType.assetCollectionSubtype, PHAssetCollectionPropertyType.estimatedAssetCount, PHAssetCollectionPropertyType.startDate, PHAssetCollectionPropertyType.endDate, PHAssetCollectionPropertyType.approximatedLocation, PHAssetCollectionPropertyType.localizedLocationNames]
+        self.dataList = [[PHAssetCollectionPropertyType.assetCollectionType, PHAssetCollectionPropertyType.assetCollectionSubtype, PHAssetCollectionPropertyType.estimatedAssetCount, PHAssetCollectionPropertyType.startDate, PHAssetCollectionPropertyType.endDate, PHAssetCollectionPropertyType.approximatedLocation, PHAssetCollectionPropertyType.localizedLocationNames], [PHAssetCollectionMethodType.fetchAssetCollectionsWithIdentifier, PHAssetCollectionMethodType.fetchAssetCollectionsWithType, PHAssetCollectionMethodType.fetchAssetCollectionsContaining, PHAssetCollectionMethodType.fetchAssetCollectionsWithALAssetGroupURLs, PHAssetCollectionMethodType.transientAssetCollectionWithAssets, PHAssetCollectionMethodType.transientAssetCollectionWithAssetFetchResult]]
     }
     
     override func initView() {
@@ -37,38 +37,82 @@ class PHAssetCollectionViewController: BaseTableViewController {
 }
 
 extension PHAssetCollectionViewController {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 100
+        } else {
+            return 44
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let items = dataList[section] as? [Any] else {
+            return 0
+        }
+        return items.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell,
-              let type = dataList[indexPath.row] as? PHAssetCollectionPropertyType else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleTextTableViewCell", for: indexPath) as? SimpleTextTableViewCell else {
             return UITableViewCell()
         }
-        var textString = ""
-        switch type {
-        case .assetCollectionType:
-            textString = assetCollectionType()
-        case .assetCollectionSubtype:
-            textString = assetCollectionSubtype()
-        case .estimatedAssetCount:
-            textString = estimatedAssetCount()
-        case .startDate:
-            textString = startDate()
-        case .endDate:
-            textString = endDate()
-        case .approximatedLocation:
-            textString = approximatedLocation()
-        case .localizedLocationNames:
-            textString = localizedLocationNames()
+        if indexPath.section == 0 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetCollectionPropertyType else { return UITableViewCell () }
+            
+            var textString = ""
+            switch type {
+            case .assetCollectionType:
+                textString = assetCollectionType()
+            case .assetCollectionSubtype:
+                textString = assetCollectionSubtype()
+            case .estimatedAssetCount:
+                textString = estimatedAssetCount()
+            case .startDate:
+                textString = startDate()
+            case .endDate:
+                textString = endDate()
+            case .approximatedLocation:
+                textString = approximatedLocation()
+            case .localizedLocationNames:
+                textString = localizedLocationNames()
+            }
+            cell.textString = "\(type): \(textString)"
+        } else if indexPath.section == 1 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetCollectionMethodType else { return UITableViewCell () }
+            cell.textString = "\(type.rawValue)"
         }
-        cell.textString = "\(type): \(textString)"
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetCollectionMethodType else { return }
+            switch type {
+            case .fetchAssetCollectionsWithIdentifier:
+                fetchAssetCollectionsWithIdentifier(type: type)
+            case .fetchAssetCollectionsWithType:
+                fetchAssetCollectionsWithType(type: type)
+            case .fetchAssetCollectionsContaining:
+                fetchAssetCollectionsContaining(type: type)
+            case .fetchAssetCollectionsWithALAssetGroupURLs:
+                fetchAssetCollectionsWithALAssetGroupURLs(type: type)
+            case .transientAssetCollectionWithAssets:
+                transientAssetCollectionWithAssets(type: type)
+            case .transientAssetCollectionWithAssetFetchResult:
+                transientAssetCollectionWithAssetFetchResult(type: type)
+            }
+        }
     }
 }
 
+// MARK: - Private Method
 private extension PHAssetCollectionViewController {
+    // MARK: Property
     func assetCollectionType() -> String {
         /*
          // 集合类型
@@ -241,6 +285,90 @@ private extension PHAssetCollectionViewController {
         }
         return locations
     }
+    
+    // MARK: Method
+    func fetchAssetCollectionsWithIdentifier(type: PHAssetCollectionMethodType) {
+        /*
+         // 通过PHAssetCollection的localIdentidier来检索PHAssetCollection
+         @available(iOS 8, *)
+         open class func fetchAssetCollections(withLocalIdentifiers identifiers: [String], options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>
+         */
+        
+        // 先获取AssetCollection的loaclIdentider，然后再取获取PHAssetCollection
+        // 由于这里没有现成的localIdentifier，所有采用这种比较绕的方式来获取
+        let albumResults: PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        var collectionIdentifiers: [String] = []
+        albumResults.enumerateObjects { assetCollection, index, stop in
+            collectionIdentifiers.append(assetCollection.localIdentifier)
+        }
+        
+        let colletions = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: collectionIdentifiers, options: nil)
+        colletions.enumerateObjects { collection, index, stop in
+            ATLog("通过localIdentifiers来获取PHAssetCollection: \(collection)", funcName: type.rawValue)
+        }
+    }
+    
+    func fetchAssetCollectionsWithType(type: PHAssetCollectionMethodType) {
+        /*
+         // 通过PHAssetCollection的type和subType来获取PHAssetCollection
+         // 如果想要获取该type下所有集合，subType设置为.any
+         @available(iOS 8, *)
+         open class func fetchAssetCollections(with type: PHAssetCollectionType, subtype: PHAssetCollectionSubtype, options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>
+         */
+        
+        let albumResults = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        albumResults.enumerateObjects { assetCollection, index, stop in
+            ATLog("通过PHAssetCollection的type和subType来获取PHAssetCollection: \(assetCollection)", funcName: type.rawValue)
+        }
+    }
+    
+    func fetchAssetCollectionsContaining(type: PHAssetCollectionMethodType) {
+        /*
+         // 通过PHAsset获取包含该资源的集合
+         // 只支持Albums和Moments
+         @available(iOS 8, *)
+         open class func fetchAssetCollectionsContaining(_ asset: PHAsset, with type: PHAssetCollectionType, options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>
+         */
+        guard let asset = PHAsset.fetchAssets(with: .image, options: nil).lastObject else { return }
+        let collections = PHAssetCollection.fetchAssetCollectionsContaining(asset, with: .smartAlbum, options: nil)
+        collections.enumerateObjects { assetCollection, index, stop in
+            ATLog("通过PHAsset获取包含该资源的集合: \(assetCollection)", funcName: type.rawValue)
+        }
+    }
+    
+    func fetchAssetCollectionsWithALAssetGroupURLs(type: PHAssetCollectionMethodType) {
+        /*
+         此处ALAsset是废弃的相册库，现在都是用PHAsset来代替它，故这里不进行讲解
+         */
+        ATLog("此处ALAsset是废弃的相册库，现在都是用PHAsset来代替它，故这里不进行讲解", funcName: type.rawValue)
+    }
+    
+    func transientAssetCollectionWithAssets(type: PHAssetCollectionMethodType) {
+        /*
+         // 通过PHAsset集合生成临时的PHAssetCollection
+         @available(iOS 8, *)
+         open class func transientAssetCollection(with assets: [PHAsset], title: String?) -> PHAssetCollection
+         */
+        let assetsFetchResult = PHAsset.fetchAssets(with: .image, options: nil)
+        var assets: [PHAsset] = []
+        assetsFetchResult.enumerateObjects { asset, index, stop in
+            assets.append(asset)
+        }
+        
+        let assetCollection = PHAssetCollection.transientAssetCollection(with: assets, title: "临时资源集合")
+        ATLog("通过PHAsset集合生成临时的PHAssetCollection \(assetCollection)", funcName: type.rawValue)
+    }
+    
+    func transientAssetCollectionWithAssetFetchResult(type: PHAssetCollectionMethodType) {
+        /*
+         // 通过PHFetchResult结果生成临时的PHAssetCollection
+         @available(iOS 8, *)
+         open class func transientAssetCollection(withAssetFetchResult fetchResult: PHFetchResult<PHAsset>, title: String?) -> PHAssetCollection
+         */
+        let assetsFetchResult = PHAsset.fetchAssets(with: .image, options: nil)
+        let assetCollection = PHAssetCollection.transientAssetCollection(withAssetFetchResult: assetsFetchResult, title: "临时资源集合")
+        ATLog("通过PHAsset集合生成临时的PHAssetCollection \(assetCollection)", funcName: type.rawValue)
+    }
 }
 
 private enum PHAssetCollectionPropertyType: String {
@@ -253,4 +381,11 @@ private enum PHAssetCollectionPropertyType: String {
     case localizedLocationNames
 }
 
-
+private enum PHAssetCollectionMethodType: String {
+    case fetchAssetCollectionsWithIdentifier = "fetchAssetCollections(withLocalIdentifiers identifiers: [String], options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>"
+    case fetchAssetCollectionsWithType = "fetchAssetCollections(with type: PHAssetCollectionType, subtype: PHAssetCollectionSubtype, options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>"
+    case fetchAssetCollectionsContaining = "fetchAssetCollectionsContaining(_ asset: PHAsset, with type: PHAssetCollectionType, options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>"
+    case fetchAssetCollectionsWithALAssetGroupURLs = "fetchAssetCollections(withALAssetGroupURLs assetGroupURLs: [URL], options: PHFetchOptions?) -> PHFetchResult<PHAssetCollection>"
+    case transientAssetCollectionWithAssets = "transientAssetCollection(with assets: [PHAsset], title: String?) -> PHAssetCollection"
+    case transientAssetCollectionWithAssetFetchResult = "transientAssetCollection(withAssetFetchResult fetchResult: PHFetchResult<PHAsset>, title: String?) -> PHAssetCollection"
+}

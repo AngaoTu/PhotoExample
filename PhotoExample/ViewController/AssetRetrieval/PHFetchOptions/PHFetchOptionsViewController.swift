@@ -82,40 +82,54 @@ private extension PHFetchOptionsViewController {
     
     func sortDescriptors() -> String {
         /*
+         // 通过指定字段来进行排序
          @available(iOS 8, *)
-         open var sortDescriptors: [NSSortDescriptor]?  // 通过指定字段来进行排序
+         open var sortDescriptors: [NSSortDescriptor]?
          */
         return "\(String(describing: fetchOptions.sortDescriptors))"
     }
     
     func includeHiddenAssets() -> String {
         /*
+         // 是否包含隐藏图片，默认是不包含
          @available(iOS 8, *)
-         open var includeHiddenAssets: Bool // 是否包含隐藏图片，默认是不包含
+         open var includeHiddenAssets: Bool
          */
         return "\(fetchOptions.includeHiddenAssets)"
     }
     
     func includeAlBurstAssets() -> String {
         /*
+         // 是否包含连拍资源，默认是不包含
          @available(iOS 8, *)
-         open var includeAllBurstAssets: Bool // 是否包含连拍资源，默认是不包含
+         open var includeAllBurstAssets: Bool
          */
         return "\(fetchOptions.includeAllBurstAssets)"
     }
     
     func includeAssetSourceTypes() -> String {
         /*
+         // 获取的资源类型，默认是所有类型
          @available(iOS 9, *)
-         open var includeAssetSourceTypes: PHAssetSourceType // 获取的资源类型，默认是所有类型
+         open var includeAssetSourceTypes: PHAssetSourceType
          */
-        return "\(fetchOptions.includeAssetSourceTypes)"
+        switch fetchOptions.includeAssetSourceTypes {
+        case .typeUserLibrary:
+            return "typeUserLibrary"
+        case .typeCloudShared:
+            return "typeCloudShared"
+        case .typeiTunesSynced:
+            return "typeiTunesSynced"
+        default:
+            return "none"
+        }
     }
     
     func fetchLimit() -> String {
         /*
+         // 搜索结果数量限制，默认为0 没有限制
          @available(iOS 9, *)
-         open var fetchLimit: Int // 搜索结果数量限制，默认为0 没有限制
+         open var fetchLimit: Int
          */
         return "\(fetchOptions.fetchLimit)"
     }
@@ -123,8 +137,9 @@ private extension PHFetchOptionsViewController {
     func wantsIncrementalChangeDetails() -> String {
         // TODO: 研究这个字端具体用法
         /*
+         // 用于确定app是否接收到了具体的改变信息，默认为true
          @available(iOS 8, *)
-         open var wantsIncrementalChangeDetails: Bool // 用于确定app是否接收到了具体的改变信息，默认为true
+         open var wantsIncrementalChangeDetails: Bool
          */
         return "\(fetchOptions.wantsIncrementalChangeDetails)"
     }

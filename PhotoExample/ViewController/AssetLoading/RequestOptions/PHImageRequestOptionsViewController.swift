@@ -85,8 +85,9 @@ private extension PHImageRequestOptionsViewController {
              case original = 2 // 请求图像资产的原始、最高保真度版本。
          }
          
+         // 图片版本
          @available(iOS 8, *)
-         open var version: PHImageRequestOptionsVersion // 图片版本
+         open var version: PHImageRequestOptionsVersion
          */
         var text = ""
         switch imageRequestOptions.version {
@@ -118,8 +119,9 @@ private extension PHImageRequestOptionsViewController {
              case fastFormat = 2 // 最快速度得到一个图像结果，可能会牺牲图像质量
          }
          
+         // 图片交付模式，默认是opportunistic
          @available(iOS 8, *)
-         open var deliveryMode: PHImageRequestOptionsDeliveryMode // 图片交付模式，默认是opportunistic
+         open var deliveryMode: PHImageRequestOptionsDeliveryMode
          */
         var text = ""
         switch imageRequestOptions.deliveryMode {
@@ -150,8 +152,9 @@ private extension PHImageRequestOptionsViewController {
              case exact = 2 // 与给定大小一致，如果使用normalizedCropRect属性，则必须指定为该模式。
          }
          
+         // 请求图像的大小，默认为fast
          @available(iOS 8, *)
-         open var resizeMode: PHImageRequestOptionsResizeMode // 请求图像的大小，默认为fast
+         open var resizeMode: PHImageRequestOptionsResizeMode
          */
         var text = ""
         switch imageRequestOptions.resizeMode {
@@ -169,8 +172,9 @@ private extension PHImageRequestOptionsViewController {
     
     func normalizedCropRect() -> String {
         /*
+         // 是否对原图进行裁剪
          @available(iOS 8, *)
-         open var normalizedCropRect: CGRect // 是否对原图进行裁剪
+         open var normalizedCropRect: CGRect
          // 如果你指定了裁剪的矩形，那么你必须对resizeMode属性设置为.exact
          */
         return "\(imageRequestOptions.normalizedCropRect)"
@@ -178,24 +182,27 @@ private extension PHImageRequestOptionsViewController {
     
     func isNetworkAccessAllowed() -> String {
         /*
+         // 是否可以从iCloud中下载图片，默认为false
          @available(iOS 8, *)
-         open var isNetworkAccessAllowed: Bool // 是否可以从iCloud中下载图片，默认为false
+         open var isNetworkAccessAllowed: Bool
          */
         return "\(imageRequestOptions.isNetworkAccessAllowed)"
     }
     
     func isSynchronous() -> String {
         /*
+         // 是否同步请求照片，默认是NO
          @available(iOS 8, *)
-         open var isSynchronous: Bool // 是否同步请求照片，默认是NO
+         open var isSynchronous: Bool
          */
         return "\(imageRequestOptions.isSynchronous)"
     }
     
     func progressHandler() -> String {
         /*
+         // 从icloud下载图片是，会定期返回下载进度
          @available(iOS 8, *)
-         open var progressHandler: PHAssetImageProgressHandler? // 从icloud下载图片是，会定期返回下载进度
+         open var progressHandler: PHAssetImageProgressHandler?
          */
         return "\(String(describing: imageRequestOptions.progressHandler))"
     }

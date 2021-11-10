@@ -51,6 +51,9 @@ extension AssetLoadingViewContoller {
         case .PHVideoRequestOptions:
             let videoViewController = PHVideoRequestOptionsViewController()
             self.navigationController?.pushViewController(videoViewController, animated: true)
+        case .PHImageManager:
+            let imageManager = PHImageManagerAssetLoading()
+            self.navigationController?.pushViewController(imageManager, animated: true)
         default:
             break
         }

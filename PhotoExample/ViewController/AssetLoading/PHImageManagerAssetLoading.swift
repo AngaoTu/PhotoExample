@@ -53,13 +53,13 @@ extension PHImageManagerAssetLoading {
         case .cancelImageRequest:
             break
         case .requestLivePhotoForAsset:
-            break
+            requestLivePhotoForAsset(type: type)
         case .requestPlayerItem:
-            break
+            requestPlayerItem(type: type)
         case .requestExportSession:
-            break
+            requestExportSession(type: type)
         case .requestAVAsset:
-            break
+            requestAVAsset(type: type)
         }
     }
 }
@@ -87,12 +87,6 @@ private extension PHImageManagerAssetLoading {
          open func requestImage(for asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?, resultHandler: @escaping (UIImage?, [AnyHashable : Any]?) -> Void) -> PHImageRequestID
          */
         let asset = PHAsset.fetchAssets(with: nil).firstObject
-        
-        //        let options = PHImageRequestOptions()
-        //        options.resizeMode = .fast
-        //        options.isSynchronous = false
-        //        options.deliveryMode = .opportunistic
-        
         PHImageManager.default().requestImage(for: asset!, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFit, options: nil) { image, infos in
             ATLog("通过PHAsset获取UIImage: image = \(image) \n infos = \(infos)", funcName: type.rawValue)
         }
@@ -135,32 +129,67 @@ private extension PHImageManagerAssetLoading {
 
 // MARK: - 加载视频
 private extension PHImageManagerAssetLoading {
-    func requestPlayerItem() {
+    func requestPlayerItem(type: PHImageManagerMethodType) {
         /*
+         // 通过PHAsset获取AVPlayerItem
          @available(iOS 8, *)
          open func requestPlayerItem(forVideo asset: PHAsset, options: PHVideoRequestOptions?, resultHandler: @escaping (AVPlayerItem?, [AnyHashable : Any]?) -> Void) -> PHImageRequestID
          */
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+        let asset = PHAsset.fetchAssets(with: options).firstObject
+        PHImageManager.default().requestPlayerItem(forVideo: asset!, options: nil) { avplayer, infos in
+            ATLog("通过PHAsset获取PHLivePhoto: AVPlayerItem =  \(avplayer) \n infos = \(infos)", funcName: type.rawValue)
+        }
     }
     
-    func requestExportSession() {
+    func requestExportSession(type: PHImageManagerMethodType) {
         /*
+         // 通过PHAsset获取AVAssetExportSession
          @available(iOS 8, *)
          open func requestExportSession(forVideo asset: PHAsset, options: PHVideoRequestOptions?, exportPreset: String, resultHandler: @escaping (AVAssetExportSession?, [AnyHashable : Any]?) -> Void) -> PHImageRequestID
          */
-        
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+        let asset = PHAsset.fetchAssets(with: options).firstObject
+        PHImageManager.default().requestExportSession(forVideo: asset!, options: nil, exportPreset: "test") { avassetExportSeesion, infos in
+            ATLog("通过PHAsset获取AVAssetExportSession: AVAssetExportSession =  \(avassetExportSeesion) \n infos = \(infos)", funcName: type.rawValue)
+        }
     }
     
-    func requestAVAsset() {
+    func requestAVAsset(type: PHImageManagerMethodType) {
         /*
+         // 通过PHAsset获取AVAsset
          @available(iOS 8, *)
          open func requestAVAsset(forVideo asset: PHAsset, options: PHVideoRequestOptions?, resultHandler: @escaping (AVAsset?, AVAudioMix?, [AnyHashable : Any]?) -> Void) -> PHImageRequestID
          */
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+        let asset = PHAsset.fetchAssets(with: options).firstObject
+        PHImageManager.default().requestAVAsset(forVideo: asset!, options: nil) { avAsset, avAudioMix, infos in
+            ATLog("通过PHAsset获取AVAsset: AVAsset = \(avAsset) \n AVAudioMix = \(avAudioMix) \n infos = \(infos)", funcName: type.rawValue)
+        }
     }
 }
 
 // MARK: - 加载Live Photo
-extension PHImageManagerAssetLoading {
-    
+private extension PHImageManagerAssetLoading {
+    func requestLivePhotoForAsset(type: PHImageManagerMethodType) {
+        /*
+         // 请求资源的实时照片表示。使用PHImageRequestOptionsDeliveryModeOpportunistic(或者如果没有指定选项)，resultHandler块可以被调用多次(第一次调用可能发生在方法返回之前)。结果处理程序的info参数中的PHImageResultIsDegradedKey键指示何时提供了一个临时的低质量的实时照片。
+         
+         // 通过PHAsset获取PHLivePhoto
+         @available(iOS 9.1, *)
+         open func requestLivePhoto(for asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode, options: PHLivePhotoRequestOptions?, resultHandler: @escaping (PHLivePhoto?, [AnyHashable : Any]?) -> Void) -> PHImageRequestID
+         */
+        
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaSubtypes = %d", PHAssetMediaSubtype.photoLive.rawValue)
+        let asset = PHAsset.fetchAssets(with: options).firstObject
+        PHImageManager.default().requestLivePhoto(for: asset!, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: nil) { livePhoto, infos in
+            ATLog("通过PHAsset获取PHLivePhoto: \(livePhoto) \n infos = \(infos)", funcName: type.rawValue)
+        }
+    }
 }
 
 private enum PHImageManagerMethodType: String {

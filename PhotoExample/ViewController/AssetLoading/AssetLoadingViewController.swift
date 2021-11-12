@@ -52,10 +52,11 @@ extension AssetLoadingViewContoller {
             let videoViewController = PHVideoRequestOptionsViewController()
             self.navigationController?.pushViewController(videoViewController, animated: true)
         case .PHImageManager:
-            let imageManager = PHImageManagerAssetLoading()
+            let imageManager = PHImageManagerViewController()
             self.navigationController?.pushViewController(imageManager, animated: true)
-        default:
-            break
+        case .PHCachingImageManager:
+            let cachingImageManaer = PHCachingImageManagerViewController()
+            self.navigationController?.pushViewController(cachingImageManaer, animated: true)
         }
     }
 }

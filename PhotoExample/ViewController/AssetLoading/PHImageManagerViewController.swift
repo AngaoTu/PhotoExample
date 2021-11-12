@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Photos
 
-class PHImageManagerAssetLoading: BaseTableViewController {
+class PHImageManagerViewController: BaseTableViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class PHImageManagerAssetLoading: BaseTableViewController {
     }
 }
 
-extension PHImageManagerAssetLoading {
+extension PHImageManagerViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -65,7 +65,7 @@ extension PHImageManagerAssetLoading {
 }
 
 // MARK: - 加载图片
-private extension PHImageManagerAssetLoading {
+private extension PHImageManagerViewController {
     func requestImageForAsset(type: PHImageManagerMethodType) {
         /*
          @abstract请求指定资产的图像表示。
@@ -88,7 +88,7 @@ private extension PHImageManagerAssetLoading {
          */
         let asset = PHAsset.fetchAssets(with: nil).firstObject
         PHImageManager.default().requestImage(for: asset!, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFit, options: nil) { image, infos in
-            ATLog("通过PHAsset获取UIImage: image = \(image) \n infos = \(infos)", funcName: type.rawValue)
+            ATLog("通过PHAsset获取UIImage: image = \(String(describing: image)) \n infos = \(String(describing: infos))", funcName: type.rawValue)
         }
     }
     
@@ -128,7 +128,7 @@ private extension PHImageManagerAssetLoading {
 }
 
 // MARK: - 加载视频
-private extension PHImageManagerAssetLoading {
+private extension PHImageManagerViewController {
     func requestPlayerItem(type: PHImageManagerMethodType) {
         /*
          // 通过PHAsset获取AVPlayerItem
@@ -139,7 +139,7 @@ private extension PHImageManagerAssetLoading {
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
         let asset = PHAsset.fetchAssets(with: options).firstObject
         PHImageManager.default().requestPlayerItem(forVideo: asset!, options: nil) { avplayer, infos in
-            ATLog("通过PHAsset获取PHLivePhoto: AVPlayerItem =  \(avplayer) \n infos = \(infos)", funcName: type.rawValue)
+            ATLog("通过PHAsset获取PHLivePhoto: AVPlayerItem =  \(String(describing: avplayer)) \n infos = \(String(describing: infos))", funcName: type.rawValue)
         }
     }
     
@@ -153,7 +153,7 @@ private extension PHImageManagerAssetLoading {
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
         let asset = PHAsset.fetchAssets(with: options).firstObject
         PHImageManager.default().requestExportSession(forVideo: asset!, options: nil, exportPreset: "test") { avassetExportSeesion, infos in
-            ATLog("通过PHAsset获取AVAssetExportSession: AVAssetExportSession =  \(avassetExportSeesion) \n infos = \(infos)", funcName: type.rawValue)
+            ATLog("通过PHAsset获取AVAssetExportSession: AVAssetExportSession =  \(String(describing: avassetExportSeesion)) \n infos = \(String(describing: infos))", funcName: type.rawValue)
         }
     }
     
@@ -167,13 +167,13 @@ private extension PHImageManagerAssetLoading {
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
         let asset = PHAsset.fetchAssets(with: options).firstObject
         PHImageManager.default().requestAVAsset(forVideo: asset!, options: nil) { avAsset, avAudioMix, infos in
-            ATLog("通过PHAsset获取AVAsset: AVAsset = \(avAsset) \n AVAudioMix = \(avAudioMix) \n infos = \(infos)", funcName: type.rawValue)
+            ATLog("通过PHAsset获取AVAsset: AVAsset = \(String(describing: avAsset)) \n AVAudioMix = \(String(describing: avAudioMix)) \n infos = \(String(describing: infos))", funcName: type.rawValue)
         }
     }
 }
 
 // MARK: - 加载Live Photo
-private extension PHImageManagerAssetLoading {
+private extension PHImageManagerViewController {
     func requestLivePhotoForAsset(type: PHImageManagerMethodType) {
         /*
          // 请求资源的实时照片表示。使用PHImageRequestOptionsDeliveryModeOpportunistic(或者如果没有指定选项)，resultHandler块可以被调用多次(第一次调用可能发生在方法返回之前)。结果处理程序的info参数中的PHImageResultIsDegradedKey键指示何时提供了一个临时的低质量的实时照片。
@@ -187,7 +187,7 @@ private extension PHImageManagerAssetLoading {
         options.predicate = NSPredicate(format: "mediaSubtypes = %d", PHAssetMediaSubtype.photoLive.rawValue)
         let asset = PHAsset.fetchAssets(with: options).firstObject
         PHImageManager.default().requestLivePhoto(for: asset!, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: nil) { livePhoto, infos in
-            ATLog("通过PHAsset获取PHLivePhoto: \(livePhoto) \n infos = \(infos)", funcName: type.rawValue)
+            ATLog("通过PHAsset获取PHLivePhoto: \(String(describing: livePhoto)) \n infos = \(String(describing: infos))", funcName: type.rawValue)
         }
     }
 }

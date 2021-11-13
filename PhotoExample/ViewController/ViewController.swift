@@ -14,7 +14,7 @@ class ViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.requestAuthorization()
-        self.dataList = [PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.changeObserver, PhotoExampleType.modifyResource]
+        self.dataList = [PhotoExampleType.photoLibary, PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.changeObserver, PhotoExampleType.modifyResource]
     }
     
     override func initView() {
@@ -40,6 +40,9 @@ extension ViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let type = dataList[indexPath.row] as? PhotoExampleType else { return }
         switch type {
+        case .photoLibary:
+            let photoLibary = PHPhotoLibraryViewController()
+            self.navigationController?.pushViewController(photoLibary, animated: true)
         case .fetchResource:
             let fetchResourceViewController = AssetRetrievalViewController()
             self.navigationController?.pushViewController(fetchResourceViewController, animated: true)
@@ -50,8 +53,6 @@ extension ViewController {
             print("tqy: 点击了 changeObserver")
         case .modifyResource:
             print("tqy: fit modifyResource")
-//        default:
-//            break
         }
     }
 }
@@ -67,6 +68,7 @@ private extension ViewController {
 }
 
 enum PhotoExampleType: String {
+    case photoLibary = "共享照片库"
     case fetchResource = "获取资源"
     case loadAsset = "加载资源"
     case changeObserver = "监听资源"

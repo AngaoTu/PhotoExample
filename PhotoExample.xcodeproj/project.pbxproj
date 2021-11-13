@@ -13,6 +13,7 @@
 		4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */; };
 		4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */; };
 		4F971C96273E453B0022BDA1 /* PHCachingImageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */; };
+		4F971C99273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */; };
 		4FC182AC26C26CE700D91499 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */; };
 		4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */; };
 		4FC847FF2737C41D006A5972 /* PHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC847FE2737C41D006A5972 /* PHCollectionViewController.swift */; };
@@ -64,6 +65,7 @@
 		4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHVideoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHLivePhotoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCachingImageManagerViewController.swift; sourceTree = "<group>"; };
+		4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibraryViewController.swift; sourceTree = "<group>"; };
 		4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListViewController.swift; sourceTree = "<group>"; };
 		4FC847FE2737C41D006A5972 /* PHCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,14 @@
 				4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */,
 			);
 			path = PHCollection;
+			sourceTree = "<group>";
+		};
+		4F971C97273F7E8A0022BDA1 /* PhotoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */,
+			);
+			path = PhotoLibrary;
 			sourceTree = "<group>";
 		};
 		4FC182AA26C26CC400D91499 /* Base */ = {
@@ -277,6 +287,7 @@
 				4FDBDCE926A6F52700799A74 /* ViewController.swift */,
 				4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */,
 				4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */,
+				4F971C97273F7E8A0022BDA1 /* PhotoLibrary */,
 				4FDBDD1D26A8031700799A74 /* AssetRetrieval */,
 				4FD6840526DCFB4D00A780D1 /* AssetLoading */,
 				4FDBDD1526A7012600799A74 /* ChangeObserver */,
@@ -482,6 +493,7 @@
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
 				4FD6841626DFA10900A780D1 /* AssetLoadingViewController.swift in Sources */,
 				4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */,
+				4F971C99273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift in Sources */,
 				4FD683DC26D6705800A780D1 /* PHFetchOptionsViewController.swift in Sources */,
 				4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */,
 				4FDBDD2126A805CC00799A74 /* FetchCollectionViewController.swift in Sources */,

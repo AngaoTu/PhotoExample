@@ -65,6 +65,10 @@ extension PHLivePhotoRequestOptionsViewController {
 private extension PHLivePhotoRequestOptionsViewController {
     func version() -> String {
         /*
+         // 这里和PHImageRequestOptions采用相同的枚举
+         @available(iOS 8, *)
+         open var version: PHImageRequestOptionsVersion // 图片版本
+         
          @available(iOS 8, iOS 8, *)
          public enum PHImageRequestOptionsVersion : Int {
 
@@ -77,10 +81,6 @@ private extension PHLivePhotoRequestOptionsViewController {
              @available(iOS 8, *)
              case original = 2 // 请求图像资产的原始、最高保真度版本。
          }
-         
-         @available(iOS 8, *)
-         open var version: PHImageRequestOptionsVersion // 图片版本
-         // 这里和PHImageRequestOptions采用相同的枚举
          */
         var text = ""
         switch livePhotoRequestOptions.version {
@@ -98,6 +98,10 @@ private extension PHLivePhotoRequestOptionsViewController {
     
     func deliveryMode() -> String {
         /*
+         // 图片交付模式，默认是opportunistic
+         @available(iOS 8, *)
+         open var deliveryMode: PHImageRequestOptionsDeliveryMode
+         
          @available(iOS 8, iOS 8, *)
          public enum PHImageRequestOptionsDeliveryMode : Int {
 
@@ -111,9 +115,6 @@ private extension PHLivePhotoRequestOptionsViewController {
              @available(iOS 8, *)
              case fastFormat = 2 // 最快速度得到一个图像结果，可能会牺牲图像质量
          }
-         
-         @available(iOS 8, *)
-         open var deliveryMode: PHImageRequestOptionsDeliveryMode // 图片交付模式，默认是opportunistic
          */
         var text = ""
         switch livePhotoRequestOptions.deliveryMode {

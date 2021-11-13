@@ -7,12 +7,13 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class AssetLoadingViewContoller: BaseTableViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [AssetLoadingType.PHImageRequetOptions, AssetLoadingType.PHLivePhotoRequestOptions, AssetLoadingType.PHVideoRequestOptions, AssetLoadingType.PHImageManager, AssetLoadingType.PHCachingImageManager]
+        dataList = [AssetLoadingType.PHImageRequetOptions, AssetLoadingType.PHLivePhotoRequestOptions, AssetLoadingType.PHVideoRequestOptions, AssetLoadingType.PHImageManager, AssetLoadingType.PHCachingImageManager, AssetLoadingType.ImageOptionsPriority]
     }
     
     override func initView() {
@@ -57,7 +58,55 @@ extension AssetLoadingViewContoller {
         case .PHCachingImageManager:
             let cachingImageManaer = PHCachingImageManagerViewController()
             self.navigationController?.pushViewController(cachingImageManaer, animated: true)
+        case .ImageOptionsPriority:
+            propertyPriorityTest()
         }
+    }
+}
+
+// MARK: - Private Method
+private extension AssetLoadingViewContoller {
+    func propertyPriorityTest() {
+        guard let asset = PHAsset.fetchAssets(with: nil).firstObject else { return }
+        
+        let options = PHImageRequestOptions()
+        options.version = .original
+        options.isSynchronous = false
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .exact
+        
+        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFill, options: options) { image, infos in
+//            ATLog("测试options属性的优先级")
+            ATLog("options1 原来width= \(asset.pixelWidth) height = \(asset.pixelHeight) \n 获取图片大小 width = \(image!.size.width) height = \(image!.size.height)")
+            ATLog("options1 isSynchronous = \(options.isSynchronous) deliveryMode = \(options.deliveryMode.rawValue)")
+
+            let imageData = image?.pngData()
+            ATLog("options1 imageData = \(imageData!.count)")
+        }
+        
+//        print("********************************************************\n")
+        
+//        options.resizeMode = .fast
+//        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFill, options: options) { image, infos in
+////            ATLog("测试options属性的优先级")
+//            ATLog("options2 原来width= \(asset.pixelWidth) height = \(asset.pixelHeight) \n 获取图片大小 width = \(image!.size.width) height = \(image!.size.height)")
+//            ATLog("options2 isSynchronous = \(options.isSynchronous) deliveryMode = \(options.deliveryMode.rawValue)")
+//
+//            let imageData = image?.pngData()
+//            ATLog("options2 imageData = \(imageData!.count)")
+//        }
+        
+//        print("********************************************************\n")
+//
+//        options.resizeMode = .exact
+//        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 320, height: 320), contentMode: .aspectFill, options: options) { image, infos in
+////            ATLog("测试options属性的优先级")
+//            ATLog("options3 原来width= \(asset.pixelWidth) height = \(asset.pixelHeight) \n 获取图片大小 width = \(image!.size.width) height = \(image!.size.height)")
+//            ATLog("options3 isSynchronous = \(options.isSynchronous) deliveryMode = \(options.deliveryMode.rawValue)")
+//
+//            let imageData = image?.pngData()
+//            ATLog("options3 imageData = \(imageData!.count)")
+//        }
     }
 }
 
@@ -67,4 +116,5 @@ private enum AssetLoadingType: String {
     case PHVideoRequestOptions
     case PHImageManager
     case PHCachingImageManager
+    case ImageOptionsPriority = "测试ImageRequestOptions中属性优先级"
 }

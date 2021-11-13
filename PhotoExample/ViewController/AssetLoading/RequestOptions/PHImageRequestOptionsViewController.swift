@@ -72,6 +72,10 @@ private extension PHImageRequestOptionsViewController {
     func version() -> String {
         // TODO: unadjusted和original的区别
         /*
+         // 图片版本
+         @available(iOS 8, *)
+         open var version: PHImageRequestOptionsVersion
+         
          @available(iOS 8, iOS 8, *)
          public enum PHImageRequestOptionsVersion : Int {
 
@@ -84,10 +88,6 @@ private extension PHImageRequestOptionsViewController {
              @available(iOS 8, *)
              case original = 2 // 请求图像资产的原始、最高保真度版本。
          }
-         
-         // 图片版本
-         @available(iOS 8, *)
-         open var version: PHImageRequestOptionsVersion
          */
         var text = ""
         switch imageRequestOptions.version {
@@ -105,6 +105,10 @@ private extension PHImageRequestOptionsViewController {
     
     func deliveryMode() -> String {
         /*
+         // 图片交付模式，默认是opportunistic
+         @available(iOS 8, *)
+         open var deliveryMode: PHImageRequestOptionsDeliveryMode
+         
          @available(iOS 8, iOS 8, *)
          public enum PHImageRequestOptionsDeliveryMode : Int {
 
@@ -118,10 +122,6 @@ private extension PHImageRequestOptionsViewController {
              @available(iOS 8, *)
              case fastFormat = 2 // 最快速度得到一个图像结果，可能会牺牲图像质量
          }
-         
-         // 图片交付模式，默认是opportunistic
-         @available(iOS 8, *)
-         open var deliveryMode: PHImageRequestOptionsDeliveryMode
          */
         var text = ""
         switch imageRequestOptions.deliveryMode {
@@ -139,6 +139,10 @@ private extension PHImageRequestOptionsViewController {
     
     func resizeMode() -> String {
         /*
+         // 请求图像的大小，默认为fast
+         @available(iOS 8, *)
+         open var resizeMode: PHImageRequestOptionsResizeMode
+         
          @available(iOS 8, iOS 8, *)
          public enum PHImageRequestOptionsResizeMode : Int {
 
@@ -151,10 +155,6 @@ private extension PHImageRequestOptionsViewController {
              @available(iOS 8, *)
              case exact = 2 // 与给定大小一致，如果使用normalizedCropRect属性，则必须指定为该模式。
          }
-         
-         // 请求图像的大小，默认为fast
-         @available(iOS 8, *)
-         open var resizeMode: PHImageRequestOptionsResizeMode
          */
         var text = ""
         switch imageRequestOptions.resizeMode {
@@ -200,7 +200,7 @@ private extension PHImageRequestOptionsViewController {
     
     func progressHandler() -> String {
         /*
-         // 从icloud下载图片是，会定期返回下载进度
+         // 从icloud下载图片时，会定期返回下载进度
          @available(iOS 8, *)
          open var progressHandler: PHAssetImageProgressHandler?
          */

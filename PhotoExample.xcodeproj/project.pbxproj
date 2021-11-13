@@ -14,6 +14,10 @@
 		4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */; };
 		4F971C96273E453B0022BDA1 /* PHCachingImageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */; };
 		4F971C99273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */; };
+		4F971C9C273FBB290022BDA1 /* PHChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C9B273FBB290022BDA1 /* PHChangeViewController.swift */; };
+		4F971CA1273FBC590022BDA1 /* ResourceChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971CA0273FBC590022BDA1 /* ResourceChangeViewController.swift */; };
+		4F971CA3273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971CA2273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift */; };
+		4F971CA5273FC7960022BDA1 /* PHFetchResultChangeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971CA4273FC7960022BDA1 /* PHFetchResultChangeDetailsViewController.swift */; };
 		4FC182AC26C26CE700D91499 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */; };
 		4FC182AE26C541EB00D91499 /* PHCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */; };
 		4FC847FF2737C41D006A5972 /* PHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC847FE2737C41D006A5972 /* PHCollectionViewController.swift */; };
@@ -66,6 +70,10 @@
 		4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHLivePhotoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCachingImageManagerViewController.swift; sourceTree = "<group>"; };
 		4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibraryViewController.swift; sourceTree = "<group>"; };
+		4F971C9B273FBB290022BDA1 /* PHChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHChangeViewController.swift; sourceTree = "<group>"; };
+		4F971CA0273FBC590022BDA1 /* ResourceChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceChangeViewController.swift; sourceTree = "<group>"; };
+		4F971CA2273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHObjectChangeDetailsViewController.swift; sourceTree = "<group>"; };
+		4F971CA4273FC7960022BDA1 /* PHFetchResultChangeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHFetchResultChangeDetailsViewController.swift; sourceTree = "<group>"; };
 		4FC182AB26C26CE700D91499 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListViewController.swift; sourceTree = "<group>"; };
 		4FC847FE2737C41D006A5972 /* PHCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +161,41 @@
 				4F971C98273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift */,
 			);
 			path = PhotoLibrary;
+			sourceTree = "<group>";
+		};
+		4F971C9A273FB0C40022BDA1 /* PHChange */ = {
+			isa = PBXGroup;
+			children = (
+				4F971CA0273FBC590022BDA1 /* ResourceChangeViewController.swift */,
+				4F971C9D273FBC200022BDA1 /* PHChange */,
+				4F971C9E273FBC2B0022BDA1 /* PHObjectChangeDetails */,
+				4F971C9F273FBC3B0022BDA1 /* PHFetchResultChangeDetails */,
+			);
+			path = PHChange;
+			sourceTree = "<group>";
+		};
+		4F971C9D273FBC200022BDA1 /* PHChange */ = {
+			isa = PBXGroup;
+			children = (
+				4F971C9B273FBB290022BDA1 /* PHChangeViewController.swift */,
+			);
+			path = PHChange;
+			sourceTree = "<group>";
+		};
+		4F971C9E273FBC2B0022BDA1 /* PHObjectChangeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4F971CA2273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift */,
+			);
+			path = PHObjectChangeDetails;
+			sourceTree = "<group>";
+		};
+		4F971C9F273FBC3B0022BDA1 /* PHFetchResultChangeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4F971CA4273FC7960022BDA1 /* PHFetchResultChangeDetailsViewController.swift */,
+			);
+			path = PHFetchResultChangeDetails;
 			sourceTree = "<group>";
 		};
 		4FC182AA26C26CC400D91499 /* Base */ = {
@@ -288,6 +331,7 @@
 				4FDBDD2426A80F3100799A74 /* AlbumListViewController.swift */,
 				4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */,
 				4F971C97273F7E8A0022BDA1 /* PhotoLibrary */,
+				4F971C9A273FB0C40022BDA1 /* PHChange */,
 				4FDBDD1D26A8031700799A74 /* AssetRetrieval */,
 				4FD6840526DCFB4D00A780D1 /* AssetLoading */,
 				4FDBDD1526A7012600799A74 /* ChangeObserver */,
@@ -486,6 +530,7 @@
 				4FDBDCEA26A6F52700799A74 /* ViewController.swift in Sources */,
 				4F971C96273E453B0022BDA1 /* PHCachingImageManagerViewController.swift in Sources */,
 				4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */,
+				4F971CA3273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift in Sources */,
 				4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */,
 				4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */,
 				4FD6840726DCFB8E00A780D1 /* PHImageManagerViewController.swift in Sources */,
@@ -493,11 +538,14 @@
 				4FDBDD1C26A8029000799A74 /* ModifyResourceViewController.swift in Sources */,
 				4FD6841626DFA10900A780D1 /* AssetLoadingViewController.swift in Sources */,
 				4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */,
+				4F971CA5273FC7960022BDA1 /* PHFetchResultChangeDetailsViewController.swift in Sources */,
 				4F971C99273F7EA70022BDA1 /* PHPhotoLibraryViewController.swift in Sources */,
 				4FD683DC26D6705800A780D1 /* PHFetchOptionsViewController.swift in Sources */,
+				4F971CA1273FBC590022BDA1 /* ResourceChangeViewController.swift in Sources */,
 				4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */,
 				4FDBDD2126A805CC00799A74 /* FetchCollectionViewController.swift in Sources */,
 				4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */,
+				4F971C9C273FBB290022BDA1 /* PHChangeViewController.swift in Sources */,
 				4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */,
 				4FDBDD2C26A83BE300799A74 /* AssetListCollectionViewCell.swift in Sources */,
 				4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */,

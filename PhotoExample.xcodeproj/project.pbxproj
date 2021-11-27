@@ -10,6 +10,7 @@
 		24234572EDF8A320B1C6040B /* libPods-PhotoExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58932F0E06E4E6B36E6137F9 /* libPods-PhotoExample.a */; };
 		4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1526AE951100A1268F /* PHAssetViewController.swift */; };
 		4F03CB1826B1545700A1268F /* PHAssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */; };
+		4F1A51A827521660002F560E /* PHAssetChangeRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A51A727521660002F560E /* PHAssetChangeRequestViewController.swift */; };
 		4F66CB4E26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */; };
 		4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */; };
 		4F971C96273E453B0022BDA1 /* PHCachingImageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */; };
@@ -66,6 +67,7 @@
 		11F72804832D263202329519 /* Pods-PhotoExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoExample.release.xcconfig"; path = "Target Support Files/Pods-PhotoExample/Pods-PhotoExample.release.xcconfig"; sourceTree = "<group>"; };
 		4F03CB1526AE951100A1268F /* PHAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetViewController.swift; sourceTree = "<group>"; };
 		4F03CB1726B1545700A1268F /* PHAssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionViewController.swift; sourceTree = "<group>"; };
+		4F1A51A727521660002F560E /* PHAssetChangeRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetChangeRequestViewController.swift; sourceTree = "<group>"; };
 		4F66CB4D26EF7ED500142B25 /* PHVideoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHVideoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F83C08F26DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHLivePhotoRequestOptionsViewController.swift; sourceTree = "<group>"; };
 		4F971C95273E453B0022BDA1 /* PHCachingImageManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCachingImageManagerViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,14 @@
 				4FC182AD26C541EB00D91499 /* PHCollectionListViewController.swift */,
 			);
 			path = PHCollection;
+			sourceTree = "<group>";
+		};
+		4F1A51A627521614002F560E /* PHChangeRequest */ = {
+			isa = PBXGroup;
+			children = (
+				4F1A51A727521660002F560E /* PHAssetChangeRequestViewController.swift */,
+			);
+			path = PHChangeRequest;
 			sourceTree = "<group>";
 		};
 		4F971C97273F7E8A0022BDA1 /* PhotoLibrary */ = {
@@ -299,17 +309,11 @@
 			path = PhotoExampleUITests;
 			sourceTree = "<group>";
 		};
-		4FDBDD1526A7012600799A74 /* ChangeObserver */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ChangeObserver;
-			sourceTree = "<group>";
-		};
 		4FDBDD1626A7018600799A74 /* ModifyResource */ = {
 			isa = PBXGroup;
 			children = (
 				4FDBDD1B26A8029000799A74 /* ModifyResourceViewController.swift */,
+				4F1A51A627521614002F560E /* PHChangeRequest */,
 			);
 			path = ModifyResource;
 			sourceTree = "<group>";
@@ -334,7 +338,6 @@
 				4F971C9A273FB0C40022BDA1 /* PHChange */,
 				4FDBDD1D26A8031700799A74 /* AssetRetrieval */,
 				4FD6840526DCFB4D00A780D1 /* AssetLoading */,
-				4FDBDD1526A7012600799A74 /* ChangeObserver */,
 				4FDBDD1626A7018600799A74 /* ModifyResource */,
 			);
 			path = ViewController;
@@ -532,6 +535,7 @@
 				4FDBDD1F26A8033300799A74 /* AssetRetrievalViewController.swift in Sources */,
 				4F971CA3273FC7830022BDA1 /* PHObjectChangeDetailsViewController.swift in Sources */,
 				4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */,
+				4F1A51A827521660002F560E /* PHAssetChangeRequestViewController.swift in Sources */,
 				4FDBDCE626A6F52700799A74 /* AppDelegate.swift in Sources */,
 				4FD6840726DCFB8E00A780D1 /* PHImageManagerViewController.swift in Sources */,
 				4FDBDD1826A7D33000799A74 /* SimpleTextTableViewCell.swift in Sources */,

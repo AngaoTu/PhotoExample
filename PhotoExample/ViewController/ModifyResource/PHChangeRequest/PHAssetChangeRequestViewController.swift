@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class PHAssetChangeReuqestViewController: BaseTableViewController {
+class PHAssetChangeRequestViewController: BaseTableViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class PHAssetChangeReuqestViewController: BaseTableViewController {
     }
 }
 
-extension PHAssetChangeReuqestViewController {
+extension PHAssetChangeRequestViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataList.count
     }
@@ -48,23 +48,7 @@ extension PHAssetChangeReuqestViewController {
         }
         if indexPath.section == 0 {
             guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetChangeRequestPropertyType else { return UITableViewCell () }
-            var textString = ""
-            switch type {
-            case .placeholderForCreatedAsset:
-                textString = placeholderForCreatedAsset()
-            case .creationDate:
-                textString = creationDate()
-            case .location:
-                textString = location()
-            case .isFavorite:
-                textString = isFavorite()
-            case .isHidden:
-                textString = isHidden()
-            case .contentEditingOutput:
-                textString = contentEditingOutput()
-            }
-            
-            cell.textString = "\(type): \(textString)"
+            cell.textString = "\(type)"
         } else if indexPath.section == 1 {
             guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetChangeRequestMethodType else { return UITableViewCell () }
             cell.textString = "\(type.rawValue)"
@@ -73,7 +57,23 @@ extension PHAssetChangeReuqestViewController {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetChangeRequestPropertyType else { return }
+            switch type {
+            case .placeholderForCreatedAsset:
+                placeholderForCreatedAsset()
+            case .creationDate:
+                creationDate()
+            case .location:
+                location()
+            case .isFavorite:
+                isFavorite()
+            case .isHidden:
+                isHidden()
+            case .contentEditingOutput:
+                break
+            }
+        } else if indexPath.section == 1 {
             guard let array = dataList[indexPath.section] as? [Any], let type = array[indexPath.row] as? PHAssetChangeRequestMethodType else { return }
             switch type {
             case .creationRequestForAsset:
@@ -94,48 +94,170 @@ extension PHAssetChangeReuqestViewController {
 }
 
 // MARK: - Private Method
-private extension PHAssetChangeReuqestViewController {
+private extension PHAssetChangeRequestViewController {
     // MARK: Property
-    func placeholderForCreatedAsset() -> String {
+    func placeholderForCreatedAsset() {
         /*
          // 变更请求创建的资产的占位符对象
+         1. 可以使用-localIdentifier在变更块完成后获取新创建的资产
+         2. 它也可以直接添加到当前更改块中的集合中
          @available(iOS 8, *)
          open var placeholderForCreatedAsset: PHObjectPlaceholder? { get }
          */
+        let image = UIImage(named: "Dustbin_down")
         var localId = ""
         PHPhotoLibrary.shared().performChanges {
-            let asset = PHAsset.fetchAssets(with: nil).firstObject
-            let request = PHAssetChangeRequest(for: asset!)
+            // 1. 可以使用-localIdentifier在变更块完成后获取新创建的资产
+            let request = PHAssetChangeRequest.creationRequestForAsset(from: image!)
             localId = request.placeholderForCreatedAsset!.localIdentifier
-        } completionHandler: { success, error in
             
+            // 2. 它也可以直接添加到当前更改块中的集合中
+            /*
+             PHAssetChangeRequest *createAssetRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+             PHObjectPlaceholder *assetPlaceholder = createAssetRequest.placeholderForCreatedAsset;
+             PHAssetCollectionChangeRequest *albumChangeRequest =
+                 [PHAssetCollectionChangeRequest changeRequestForAssetCollection:album];
+             [albumChangeRequest addAssets:@[ assetPlaceholder ]];
+             */
+        } completionHandler: { success, error in
+            if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil).firstObject {
+                ATLog("获取成功 asset = \(asset)")
+            } else {
+                ATLog("获取失败")
+            }
         }
-
-        return ""
     }
     
-    func creationDate() -> String {
-        return ""
+    func creationDate() {
+        /*
+         // 创建时间
+         @available(iOS 8, *)
+         open var creationDate: Date?
+         */
+        
+        let asset = PHAsset.fetchAssets(with: nil).lastObject
+        let localId = asset!.localIdentifier
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetChangeRequest(for: asset!)
+            request.creationDate = Date()
+        } completionHandler: { success, error in
+            if success {
+                let currentAsset = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil).firstObject
+                ATLog("修改后createDate = \(currentAsset?.creationDate)")
+            }
+        }
     }
     
-    func location() -> String {
-        return ""
+    func location() {
+        /*
+         // 地点
+         @available(iOS 8, *)
+         open var location: CLLocation?
+         */
+        let asset = PHAsset.fetchAssets(with: nil).lastObject
+        let localId = asset!.localIdentifier
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetChangeRequest(for: asset!)
+            request.location = CLLocation(latitude: 39.916527, longitude: 116.397128)
+        } completionHandler: { success, error in
+            if success {
+                let currentAsset = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil).firstObject
+                ATLog("修改后createDate = \(currentAsset?.location)")
+            }
+        }
     }
     
-    func isFavorite() -> String {
-        return ""
+    func isFavorite() {
+        /*
+         // 是否喜欢
+         @available(iOS 8, *)
+         open var isFavorite: Bool
+         */
+        let asset = PHAsset.fetchAssets(with: nil).lastObject
+        let localId = asset!.localIdentifier
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetChangeRequest(for: asset!)
+            request.isFavorite = !asset!.isFavorite
+        } completionHandler: { success, error in
+            if success {
+                let currentAsset = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil).firstObject
+                ATLog("修改后createDate = \(currentAsset?.isFavorite)")
+            }
+        }
     }
     
-    func isHidden() -> String {
-        return ""
+    func isHidden() {
+        /*
+         // 是否隐藏
+         @available(iOS 8, *)
+         open var isHidden: Bool
+         */
+        let asset = PHAsset.fetchAssets(with: nil).lastObject
+        let localId = asset!.localIdentifier
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetChangeRequest(for: asset!)
+            request.isHidden = !asset!.isHidden
+        } completionHandler: { success, error in
+            if success {
+                let currentAsset = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil).firstObject
+                ATLog("修改后createDate = \(currentAsset?.isHidden)")
+            }
+        }
     }
     
-    func contentEditingOutput() -> String {
-        return ""
+    func contentEditingOutput() {
+        // TODO: 编辑操作
     }
     
     // MARK: Method
+    func creationRequestForAsset() {
+        /*
+         // 通过UIImage创建新Asset
+         @available(iOS 8, *)
+         open class func creationRequestForAsset(from image: UIImage) -> Self
+         */
+    }
     
+    func creationRequestForAssetFromImage() {
+        /*
+         // 通过照片file创建新Asset
+         @available(iOS 8, *)
+         open class func creationRequestForAssetFromImage(atFileURL fileURL: URL) -> Self?
+         */
+    }
+    
+    func creationRequestForAssetFromVideo() {
+        /*
+         // 通过视频file创建新Asset
+         @available(iOS 8, *)
+         open class func creationRequestForAssetFromVideo(atFileURL fileURL: URL) -> Self?
+         */
+    }
+    
+    func deleteAssets() {
+        /*
+         // 删除Assets
+         @available(iOS 8, *)
+         open class func deleteAssets(_ assets: NSFastEnumeration)
+         */
+    }
+    
+    func initForAsset() {
+        /*
+         // 通过Asset初始化一个PHAssetChangeRequest
+         @available(iOS 8, *)
+         public convenience init(for asset: PHAsset)
+         */
+    }
+    
+    func revertAssetContentToOriginal() {
+        /*
+         TODO: PHAssetResourceManager
+         // 请求恢复对资产内容所做的任何编辑
+         @available(iOS 8, *)
+         open func revertAssetContentToOriginal()
+         */
+    }
 }
 
 private enum PHAssetChangeRequestPropertyType: String {

@@ -40,7 +40,7 @@ extension ModifyResourceViewController {
         guard let type = dataList[indexPath.row] as? ModifyResourceType else { return }
         switch type {
         case .PHChangeRequest:
-            let phassetChangeRequestViewController = PHAssetChangeReuqestViewController()
+            let phassetChangeRequestViewController = PHAssetChangeRequestViewController()
             self.navigationController?.pushViewController(phassetChangeRequestViewController, animated: true)
         }
     }

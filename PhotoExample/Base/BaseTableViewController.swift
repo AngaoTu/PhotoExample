@@ -19,6 +19,7 @@ class BaseTableViewController: UIViewController {
         temp.delegate = self
         temp.dataSource = self
         temp.rowHeight = 44
+        temp.register(SimpleTextTableViewCell.self, forCellReuseIdentifier: "SimpleTextTableViewCell")
         return temp
     }()
     

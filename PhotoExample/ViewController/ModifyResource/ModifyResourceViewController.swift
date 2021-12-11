@@ -12,7 +12,7 @@ class ModifyResourceViewController: BaseTableViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [ModifyResourceType.PHChangeRequest]
+        dataList = [ModifyResourceType.PHAssetChangeRequest, ModifyResourceType.PHCollectionListChangeRequest, ModifyResourceType.PHAssetCollectionChangeRequest]
     }
     
     override func initView() {
@@ -39,13 +39,21 @@ extension ModifyResourceViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let type = dataList[indexPath.row] as? ModifyResourceType else { return }
         switch type {
-        case .PHChangeRequest:
+        case .PHAssetChangeRequest:
             let phassetChangeRequestViewController = PHAssetChangeRequestViewController()
             self.navigationController?.pushViewController(phassetChangeRequestViewController, animated: true)
+        case .PHCollectionListChangeRequest:
+            let collectionListChangeRequestViewController = PHCollectionListChangeRequestViewController()
+            self.navigationController?.pushViewController(collectionListChangeRequestViewController, animated: true)
+        case .PHAssetCollectionChangeRequest:
+            let assetCollectionChangeRequstViewController = PHAssetCollectionChangeRequestViewController()
+            self.navigationController?.pushViewController(assetCollectionChangeRequstViewController, animated: true)
         }
     }
 }
 
 private enum ModifyResourceType: String {
-    case PHChangeRequest
+    case PHAssetChangeRequest
+    case PHCollectionListChangeRequest
+    case PHAssetCollectionChangeRequest
 }

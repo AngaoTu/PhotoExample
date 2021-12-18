@@ -12,7 +12,7 @@ class AssetResourceViewController: BaseTableViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [ResourceManagerType.PHAssetResource]
+        dataList = [ResourceManagerType.PHAssetResource, ResourceManagerType.PHAssetResourceRequestOptions, ResourceManagerType.PHAssetResourceManager]
     }
     
     override func initView() {
@@ -41,10 +41,17 @@ extension AssetResourceViewController {
         case .PHAssetResource:
             let assetResourceViewController = PHAssetResourceViewController()
             self.navigationController?.pushViewController(assetResourceViewController, animated: true)
+        case .PHAssetResourceRequestOptions:
+            break
+        case .PHAssetResourceManager:
+            let assetResourceManagerViewController = PHAssetResourceManagerViewController()
+            self.navigationController?.pushViewController(assetResourceManagerViewController, animated: true)
         }
     }
 }
 
 private enum ResourceManagerType: String {
     case PHAssetResource
+    case PHAssetResourceRequestOptions
+    case PHAssetResourceManager
 }

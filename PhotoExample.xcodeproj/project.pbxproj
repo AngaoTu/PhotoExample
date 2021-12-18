@@ -45,6 +45,7 @@
 		4FDBDD2A26A83B2500799A74 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */; };
 		4FDBDD2C26A83BE300799A74 /* AssetListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBDD2B26A83BE300799A74 /* AssetListCollectionViewCell.swift */; };
 		4FE6EE49276DBA870000B750 /* PHAssetResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6EE48276DBA860000B750 /* PHAssetResourceViewController.swift */; };
+		4FE6EE4B276DDD3B0000B750 /* PHAssetResourceManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6EE4A276DDD3A0000B750 /* PHAssetResourceManagerViewController.swift */; };
 		4FEFE98527648E670066B620 /* PHCollectionListChangeRequstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE98427648E670066B620 /* PHCollectionListChangeRequstViewController.swift */; };
 		4FEFE9872764A0400066B620 /* PHAssetCollectionChangRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE9862764A03F0066B620 /* PHAssetCollectionChangRequestViewController.swift */; };
 		4FEFE9A3276A186F0066B620 /* AssetResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE9A2276A186E0066B620 /* AssetResourceViewController.swift */; };
@@ -112,6 +113,7 @@
 		4FDBDD2926A83B2500799A74 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		4FDBDD2B26A83BE300799A74 /* AssetListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FE6EE48276DBA860000B750 /* PHAssetResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetResourceViewController.swift; sourceTree = "<group>"; };
+		4FE6EE4A276DDD3A0000B750 /* PHAssetResourceManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetResourceManagerViewController.swift; sourceTree = "<group>"; };
 		4FEFE98427648E670066B620 /* PHCollectionListChangeRequstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCollectionListChangeRequstViewController.swift; sourceTree = "<group>"; };
 		4FEFE9862764A03F0066B620 /* PHAssetCollectionChangRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionChangRequestViewController.swift; sourceTree = "<group>"; };
 		4FEFE9A2276A186E0066B620 /* AssetResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetResourceViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			children = (
 				4FEFE9A2276A186E0066B620 /* AssetResourceViewController.swift */,
 				4FE6EE48276DBA860000B750 /* PHAssetResourceViewController.swift */,
+				4FE6EE4A276DDD3A0000B750 /* PHAssetResourceManagerViewController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				4F03CB1626AE951100A1268F /* PHAssetViewController.swift in Sources */,
 				4F971C9C273FBB290022BDA1 /* PHChangeViewController.swift in Sources */,
 				4FDBDCE826A6F52700799A74 /* SceneDelegate.swift in Sources */,
+				4FE6EE4B276DDD3B0000B750 /* PHAssetResourceManagerViewController.swift in Sources */,
 				4FEFE9A3276A186F0066B620 /* AssetResourceViewController.swift in Sources */,
 				4FDBDD2C26A83BE300799A74 /* AssetListCollectionViewCell.swift in Sources */,
 				4F83C09026DFAC49002799AB /* PHLivePhotoRequestOptionsViewController.swift in Sources */,

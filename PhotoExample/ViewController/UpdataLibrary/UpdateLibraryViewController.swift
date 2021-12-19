@@ -1,5 +1,5 @@
 //
-//  ModifyResourceViewController.swift
+//  UpdateLibraryViewController.swift
 //  PhotoExample
 //
 //  Created by AngaoTu on 2021/7/21.
@@ -8,11 +8,11 @@
 import UIKit
 import Photos
 
-class ModifyResourceViewController: BaseTableViewController {
+class UpdateLibraryViewController: BaseTableViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataList = [ModifyResourceType.PHAssetChangeRequest, ModifyResourceType.PHCollectionListChangeRequest, ModifyResourceType.PHAssetCollectionChangeRequest]
+        dataList = [ModifyResourceType.PHAssetChangeRequest, ModifyResourceType.PHAssetCreationRequest, ModifyResourceType.PHCollectionListChangeRequest, ModifyResourceType.PHAssetCollectionChangeRequest]
     }
     
     override func initView() {
@@ -22,7 +22,7 @@ class ModifyResourceViewController: BaseTableViewController {
     }
 }
 
-extension ModifyResourceViewController {
+extension UpdateLibraryViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -42,6 +42,9 @@ extension ModifyResourceViewController {
         case .PHAssetChangeRequest:
             let phassetChangeRequestViewController = PHAssetChangeRequestViewController()
             self.navigationController?.pushViewController(phassetChangeRequestViewController, animated: true)
+        case .PHAssetCreationRequest:
+            let assetCreationRequest = PHAssetCreationRequestViewController()
+            self.navigationController?.pushViewController(assetCreationRequest, animated: true)
         case .PHCollectionListChangeRequest:
             let collectionListChangeRequestViewController = PHCollectionListChangeRequestViewController()
             self.navigationController?.pushViewController(collectionListChangeRequestViewController, animated: true)
@@ -54,6 +57,7 @@ extension ModifyResourceViewController {
 
 private enum ModifyResourceType: String {
     case PHAssetChangeRequest
+    case PHAssetCreationRequest
     case PHCollectionListChangeRequest
     case PHAssetCollectionChangeRequest
 }

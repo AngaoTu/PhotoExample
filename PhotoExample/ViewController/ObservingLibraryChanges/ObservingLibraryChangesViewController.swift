@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Photos
 
-class ResourceChangeViewController: BaseTableViewController {
+class ObservingLibraryChangesViewController: BaseTableViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ResourceChangeViewController: BaseTableViewController {
     }
 }
 
-extension ResourceChangeViewController {
+extension ObservingLibraryChangesViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataList.count
     }
@@ -53,7 +53,7 @@ extension ResourceChangeViewController {
 }
 
 private enum ResourceChangeType: String {
-    case phChange = "PHChange模型"
-    case phObjectChangeDetails = "PHObjectChangeDetails模型"
-    case phFetchResultChangeDetails = "PHFetchResultChangeDetails模型"
+    case phChange = "PHChange"
+    case phObjectChangeDetails = "PHObjectChangeDetails"
+    case phFetchResultChangeDetails = "PHFetchResultChangeDetails"
 }

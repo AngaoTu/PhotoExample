@@ -14,7 +14,7 @@ class ViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.requestAuthorization()
-        self.dataList = [PhotoExampleType.photoLibary, PhotoExampleType.resourceChange, PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.modifyResource, PhotoExampleType.assetResource]
+        self.dataList = [PhotoExampleType.photoLibary, PhotoExampleType.resourceChange, PhotoExampleType.resourceUpdateChange, PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.modifyResource, PhotoExampleType.assetResource]
     }
     
     override func initView() {
@@ -44,8 +44,11 @@ extension ViewController {
             let photoLibary = PHPhotoLibraryViewController()
             self.navigationController?.pushViewController(photoLibary, animated: true)
         case .resourceChange:
-            let resouceChange = ResourceChangeViewController()
+            let resouceChange = ObservingLibraryChangesViewController()
             self.navigationController?.pushViewController(resouceChange, animated: true)
+        case .resourceUpdateChange:
+            let updateLibrary = UpdateLibraryViewController()
+            self.navigationController?.pushViewController(updateLibrary, animated: true)
         case .fetchResource:
             let fetchResourceViewController = AssetRetrievalViewController()
             self.navigationController?.pushViewController(fetchResourceViewController, animated: true)
@@ -53,8 +56,9 @@ extension ViewController {
             let assetLoadingViewControlelr = AssetLoadingViewContoller()
             self.navigationController?.pushViewController(assetLoadingViewControlelr, animated: true)
         case .modifyResource:
-            let modifyResourceViewController = ModifyResourceViewController()
-            self.navigationController?.pushViewController(modifyResourceViewController, animated: true)
+//            let modifyResourceViewController = ModifyResourceViewController()
+//            self.navigationController?.pushViewController(modifyResourceViewController, animated: true)
+            break
         case .assetResource:
             let assetResourceViewController = AssetResourceViewController()
             self.navigationController?.pushViewController(assetResourceViewController, animated: true)
@@ -75,8 +79,9 @@ private extension ViewController {
 enum PhotoExampleType: String {
     case photoLibary = "共享照片库"
     case resourceChange = "照片库资源变化"
+    case resourceUpdateChange = "更新照片库资源"
     case fetchResource = "获取资源"
     case loadAsset = "加载资源"
     case modifyResource = "修改资源"
-    case assetResource = "Asset资源管理"
+    case assetResource = "AssetResource资源管理"
 }

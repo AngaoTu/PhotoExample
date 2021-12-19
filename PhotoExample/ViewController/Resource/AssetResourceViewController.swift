@@ -42,7 +42,8 @@ extension AssetResourceViewController {
             let assetResourceViewController = PHAssetResourceViewController()
             self.navigationController?.pushViewController(assetResourceViewController, animated: true)
         case .PHAssetResourceRequestOptions:
-            break
+            let assetResourceRequestOptions = PHAssetResourceRequestOptionsViewController()
+            self.navigationController?.pushViewController(assetResourceRequestOptions, animated: true)
         case .PHAssetResourceManager:
             let assetResourceManagerViewController = PHAssetResourceManagerViewController()
             self.navigationController?.pushViewController(assetResourceManagerViewController, animated: true)

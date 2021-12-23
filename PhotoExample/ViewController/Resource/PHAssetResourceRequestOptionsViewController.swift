@@ -80,7 +80,7 @@ private extension PHAssetResourceRequestOptionsViewController {
     
     func progressHandler() -> String {
         /*
-         //  // 从icloud下载图片时，会定期返回下载进度
+         // 从icloud下载图片时，会定期返回下载进度
          @available(iOS 9, *)
          open var progressHandler: PHAssetResourceProgressHandler?
          */

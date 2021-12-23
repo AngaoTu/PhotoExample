@@ -195,7 +195,7 @@ private extension PHAssetResourceViewController {
     
     func originalFilename() -> String {
         /*
-         // assetResource在创建时倒入的原始名称
+         // assetResource在创建时导入的原始名称
          @available(iOS 9, *)
          open var originalFilename: String { get }
          */

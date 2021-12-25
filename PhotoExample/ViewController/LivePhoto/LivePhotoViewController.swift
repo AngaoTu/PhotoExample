@@ -42,7 +42,8 @@ extension LivePhotoViewController {
             let livePhotoViewController = PHLivePhotoViewController()
             self.navigationController?.pushViewController(livePhotoViewController, animated: true)
         case .PHLivePhotoView:
-            break
+            let livePhotoViewViewController = PHLivePhotoViewViewController()
+            self.navigationController?.pushViewController(livePhotoViewViewController, animated: true)
         }
     }
 }

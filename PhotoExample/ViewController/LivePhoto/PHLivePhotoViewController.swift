@@ -89,7 +89,7 @@ private extension PHLivePhotoViewController {
     // MARK: Method
     func request(type: PHLivePhotoMethodType) {
         /*
-         // 使用此方法可以以前从Photos库导出的数据文件中加载Live Photo对象以显示
+         // 使用此方法可以用以前从Photos库导出的数据文件中加载Live Photo对象以显示
          // 如果需要数据文件LivePhoto导入photos库中，可以使用PHAssetCreationRequest
          @available(iOS 9.1, *)
          open class func request(withResourceFileURLs fileURLs: [URL], placeholderImage image: UIImage?, targetSize: CGSize, contentMode: PHImageContentMode, resultHandler: @escaping (PHLivePhoto?, [AnyHashable : Any]) -> Void) -> PHLivePhotoRequestID

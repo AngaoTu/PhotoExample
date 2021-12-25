@@ -14,7 +14,7 @@ class ViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.requestAuthorization()
-        self.dataList = [PhotoExampleType.photoLibary, PhotoExampleType.resourceChange, PhotoExampleType.resourceUpdateChange, PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.modifyResource, PhotoExampleType.assetResource]
+        self.dataList = [PhotoExampleType.photoLibary, PhotoExampleType.resourceChange, PhotoExampleType.resourceUpdateChange, PhotoExampleType.fetchResource, PhotoExampleType.loadAsset, PhotoExampleType.modifyResource, PhotoExampleType.assetResource, PhotoExampleType.livePhoto]
     }
     
     override func initView() {
@@ -62,6 +62,9 @@ extension ViewController {
         case .assetResource:
             let assetResourceViewController = AssetResourceViewController()
             self.navigationController?.pushViewController(assetResourceViewController, animated: true)
+        case .livePhoto:
+            let livePhotoViewController = LivePhotoViewController()
+            self.navigationController?.pushViewController(livePhotoViewController, animated: true)
         }
     }
 }
@@ -84,4 +87,5 @@ enum PhotoExampleType: String {
     case loadAsset = "加载资源"
     case modifyResource = "修改资源"
     case assetResource = "AssetResource资源管理"
+    case livePhoto = "实况照片"
 }
